@@ -1,66 +1,51 @@
-import React, { PureComponent, useEffect, useRef } from 'react';
+import { useState } from 'react';
 
-class Bezier extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    //this.handleMouseDown = props.handleMouseDown;
-
-    //this.state = useRef([]);
-  }
-
-  render() {
-    const { viewBoxWidth, viewBoxHeight } = this.props;
-    const { startPoint, controlPoint1, controlPoint2, endPoint } = this.state;
-    //const { handleMouseDown } = props;
-    const instructions = `
+const BezierCurve = (props) => {
+  const { id, startPoint, controlPoint1, controlPoint2, endPoint } =
+    props.curve;
+  const { handleMouseDown } = props;
+  const instructions = `
         M ${startPoint.x},${startPoint.y}
         C ${controlPoint1.x},${controlPoint1.y}
           ${controlPoint2.x},${controlPoint2.y}
           ${endPoint.x},${endPoint.y}
       `;
-    return (
-      <svg
-        ref={(node) => (this.node = node)}
-        /*viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-          onMouseMove={(ev) => this.handleMouseMove(ev)}
-          onMouseUp={() => this.handleMouseUp()}
-          onMouseLeave={() => this.handleMouseUp()}*/
-        style={{
-          overflow: 'visible',
-          width: '100%',
-          border: '1px solid',
-        }}
-      >
-        <ConnectingLine from={startPoint} to={controlPoint1} />
-        <ConnectingLine from={controlPoint2} to={endPoint} />
+  return (
+    <svg
+      style={{
+        overflow: 'visible',
+        width: '100%',
+        border: '1px solid',
+      }}
+    >
+      <ConnectingLine from={startPoint} to={controlPoint1} />
+      <ConnectingLine from={controlPoint2} to={endPoint} />
 
-        <Curve instructions={instructions} />
+      <Curve instructions={instructions} />
 
-        <TailHandle
-          coordinates={startPoint}
-          onMouseDown={() => this.handleMouseDown('startPoint')}
-        />
+      <TailHandle
+        coordinates={startPoint}
+        onMouseDown={() => handleMouseDown(id, 'startPoint')}
+      />
 
-        <HeadHandle
-          coordinates={endPoint}
-          crl2={controlPoint2}
-          onMouseDown={() => this.handleMouseDown('endPoint')}
-        />
+      <HeadHandle
+        coordinates={endPoint}
+        crl2={controlPoint2}
+        onMouseDown={() => handleMouseDown(id, 'endPoint')}
+      />
 
-        <SmallHandle
-          coordinates={controlPoint1}
-          onMouseDown={() => this.handleMouseDown('controlPoint1')}
-        />
+      <SmallHandle
+        coordinates={controlPoint1}
+        onMouseDown={() => handleMouseDown(id, 'controlPoint1')}
+      />
 
-        <SmallHandle
-          coordinates={controlPoint2}
-          onMouseDown={() => this.handleMouseDown('controlPoint2')}
-        />
-      </svg>
-    );
-  }
-}
+      <SmallHandle
+        coordinates={controlPoint2}
+        onMouseDown={() => handleMouseDown(id, 'controlPoint2')}
+      />
+    </svg>
+  );
+};
 
 const ConnectingLine = ({ from, to }) => (
   <line
@@ -168,4 +153,4 @@ const SmallHandle = ({ coordinates, onMouseDown }) => (
   />
 );
 
-export default Bezier;
+export default BezierCurve;
