@@ -1,5 +1,6 @@
 import BezierCurve from './BezierCurve';
 import Text from 'react-svg-text';
+import './node.module.css';
 
 const getStartPoint = ({ x, y }, r, theta) => {
   theta *= Math.PI / 180;
@@ -12,41 +13,41 @@ const Node = (props) => {
   const startInitR = getStartPoint(init.position, init.r, -45);
   const startInitL = getStartPoint(init.position, init.r, 225);
   const { handleMouseDown } = props;*/
-  const state = props.nodeData;
+  const node = props.nodeData;
   const { handleMouseDown, handleMouseDownOnNode } = props;
   return (
     <svg>
       <BezierCurve
         handleMouseDown={handleMouseDown}
         isLeft={true}
-        parentNodeId={0}
-        curve={state.leftCurve}
+        parentNodeId={node.id}
+        curve={node.leftCurve}
       />
       <BezierCurve
         handleMouseDown={handleMouseDown}
         isLeft={false}
-        parentNodeId={0}
-        curve={state.rightCurve}
+        parentNodeId={node.id}
+        curve={node.rightCurve}
       />
       <ellipse
         onMouseDown={handleMouseDownOnNode}
-        cx={state.position.x}
-        cy={state.position.y}
-        rx={state.r}
-        ry={state.r}
+        cx={node.position.x}
+        cy={node.position.y}
+        rx={node.r}
+        ry={node.r}
         fill="white"
         stroke="rgb(244, 0, 137)"
         strokeWidth={2}
         style={{ cursor: '-webkit-grab' }}
       />
-      {<Text
+      <Text
         className="unselectable"
-        x={state.position.x}
-        y={state.position.y}
+        x={node.position.x}
+        y={node.position.y}
         verticalAnchor="start"
       >
-        {props.nodeData.value}
-      </Text>}
+        {node.value}
+      </Text>
     </svg>
   );
 };

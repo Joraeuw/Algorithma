@@ -6,6 +6,10 @@ const Panel = (props) => {
   const init = { id: 0, r: 50, position: { x: 100, y: 100 } };
   const startInitR = getStartPoint(init.position, init.r, -45);
   const startInitL = getStartPoint(init.position, init.r, 225);
+
+  const init2 = { id: 1, r: 50, position: { x: 300, y: 300 } };
+  const startInitR2 = getStartPoint(init2.position, init2.r, -45);
+  const startInitL2 = getStartPoint(init2.position, init2.r, 225);
   const stateInit = {
     nodes: [
       {
@@ -35,6 +39,35 @@ const Panel = (props) => {
         parentConnectionLocation: {
           x: init.position,
           y: init.position - init.r,
+        },
+      },
+      {
+        id: 1,
+        r: init2.r,
+        position: { x: 300, y: 300 },
+        value: 'node1',
+        rightCurve: {
+          id: 0,
+          value: 'node1',
+          isConnected: false,
+          startPoint: startInitR2,
+          controlPoint1: startInitR2,
+          controlPoint2: startInitR2,
+          endPoint: startInitR2,
+        },
+        leftCurve: {
+          id: 1,
+          value: 'node2',
+          isConnected: false,
+          startPoint: startInitL2,
+          controlPoint1: startInitL2,
+          controlPoint2: startInitL2,
+          endPoint: startInitL2,
+        },
+
+        parentConnectionLocation: {
+          x: init2.position,
+          y: init2.position - init2.r,
         },
       },
     ],
@@ -149,6 +182,14 @@ const Panel = (props) => {
       curve={curve}
     />
   ));*/
+  const nodes = state.nodes.map((node) => (
+    <Node
+      key={node.id.toString()}
+      handleMouseDownOnNode={() => handleMouseDownOnNode(node.id)}
+      handleMouseDown={handleMouseDown}
+      nodeData={node}
+    />
+  ));
 
   return (
     <svg
@@ -159,11 +200,13 @@ const Panel = (props) => {
       onMouseUp={() => handleMouseUp()}
       onMouseLeave={() => handleMouseUp()}
     >
-      <Node
+      {
+        nodes /*<Node
         handleMouseDownOnNode={() => handleMouseDownOnNode(0)}
         handleMouseDown={handleMouseDown}
         nodeData={state.nodes[0]}
-      />
+      />*/
+      }
     </svg>
   );
 };
