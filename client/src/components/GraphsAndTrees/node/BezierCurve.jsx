@@ -1,9 +1,6 @@
-import { useState } from 'react';
-
 const BezierCurve = (props) => {
-  const { id, startPoint, controlPoint1, controlPoint2, endPoint } =
-    props.curve;
-  const { handleMouseDown } = props;
+  const { startPoint, controlPoint1, controlPoint2, endPoint } = props.curve;
+  const { handleMouseDown, parentNodeId, isLeft } = props;
   const instructions = `
         M ${startPoint.x},${startPoint.y}
         C ${controlPoint1.x},${controlPoint1.y}
@@ -23,25 +20,26 @@ const BezierCurve = (props) => {
 
       <Curve instructions={instructions} />
 
-      <TailHandle
-        coordinates={startPoint}
-        onMouseDown={() => handleMouseDown(id, 'startPoint')}
-      />
+      <TailHandle coordinates={startPoint} />
 
       <HeadHandle
         coordinates={endPoint}
         crl2={controlPoint2}
-        onMouseDown={() => handleMouseDown(id, 'endPoint')}
+        onMouseDown={() => handleMouseDown(parentNodeId, isLeft, 'endPoint')}
       />
 
       <SmallHandle
         coordinates={controlPoint1}
-        onMouseDown={() => handleMouseDown(id, 'controlPoint1')}
+        onMouseDown={() =>
+          handleMouseDown(parentNodeId, isLeft, 'controlPoint1')
+        }
       />
 
       <SmallHandle
         coordinates={controlPoint2}
-        onMouseDown={() => handleMouseDown(id, 'controlPoint2')}
+        onMouseDown={() =>
+          handleMouseDown(parentNodeId, isLeft, 'controlPoint2')
+        }
       />
     </svg>
   );
@@ -72,8 +70,8 @@ const TailHandle = ({ coordinates, onMouseDown }) => (
   <ellipse
     cx={coordinates.x}
     cy={coordinates.y}
-    rx={15}
-    ry={15}
+    rx={1}
+    ry={1}
     fill="rgb(244, 0, 137)"
     onMouseDown={onMouseDown}
     style={{ cursor: '-webkit-grab' }}
