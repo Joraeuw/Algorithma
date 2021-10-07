@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import BezierCurve from './node/BezierCurve';
 import Node from './node/Node';
+import { getStartPoint } from '../../staticFunctions';
 
 const Panel = (props) => {
+  const initR = 10;
+  const offset = 0;
   const init = { id: 0, r: 50, position: { x: 100, y: 100 } };
   const startInitR = getStartPoint(init.position, init.r, -45);
   const startInitL = getStartPoint(init.position, init.r, 225);
@@ -19,7 +22,7 @@ const Panel = (props) => {
         value: 'node0',
         rightCurve: {
           id: 0,
-          value: 'node1',
+          childId: 1,
           isConnected: false,
           startPoint: startInitR,
           controlPoint1: startInitR,
@@ -28,7 +31,7 @@ const Panel = (props) => {
         },
         leftCurve: {
           id: 1,
-          value: 'node2',
+          child: 'node2',
           isConnected: false,
           startPoint: startInitL,
           controlPoint1: startInitL,
@@ -37,8 +40,9 @@ const Panel = (props) => {
         },
 
         parentConnectionLocation: {
-          x: init.position,
-          y: init.position - init.r,
+          r: initR,
+          x: init.position.x,
+          y: init.position.y - init.r + offset,
         },
       },
       {
@@ -48,7 +52,7 @@ const Panel = (props) => {
         value: 'node1',
         rightCurve: {
           id: 0,
-          value: 'node1',
+          childId: null,
           isConnected: false,
           startPoint: startInitR2,
           controlPoint1: startInitR2,
@@ -57,7 +61,7 @@ const Panel = (props) => {
         },
         leftCurve: {
           id: 1,
-          value: 'node2',
+          child: 'node2',
           isConnected: false,
           startPoint: startInitL2,
           controlPoint1: startInitL2,
@@ -66,8 +70,9 @@ const Panel = (props) => {
         },
 
         parentConnectionLocation: {
-          x: init2.position,
-          y: init2.position - init2.r,
+          r: initR,
+          x: init2.position.x,
+          y: init2.position.y - init2.r + offset,
         },
       },
     ],
@@ -84,7 +89,13 @@ const Panel = (props) => {
     });
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (nodeId = 0, isLeft = false) => {
+    const newState = { ...state };
+    newState.draggingObjectId = null;
+
+    setState(newState);
+  };
+  const handleMouseLeave = () => {
     setState({ ...state, draggingObjectId: null });
   };
 
@@ -116,6 +127,7 @@ const Panel = (props) => {
         state.nodes[nodeId].r,
         225
       );
+      setParentConnectionLocation(newState, nodeId);
       setState(newState);
       return;
     }
@@ -163,30 +175,32 @@ const Panel = (props) => {
           y: viewBoxY,
         };
 
+    setParentConnectionLocation(newState, parentNodeId);
     setState(newState);
     //console.log(state);
   };
 
+  const setParentConnectionLocation = (newState, parentNodeId) => {
+    newState.nodes[parentNodeId].parentConnectionLocation.x =
+      newState.nodes[parentNodeId].position.x;
+    newState.nodes[parentNodeId].parentConnectionLocation.y =
+      newState.nodes[parentNodeId].position.y - init2.r + offset;
+
+    return newState;
+  };
   const handleMouseDownOnNode = (nodeId) => {
     setState({
       ...state,
       draggingObjectId: { nodeId },
     });
   };
-  //console.log(state.curves[0]);
 
-  /*const curves = state.curves.map((curve) => (
-    <BezierCurve
-      key={curve.id.toString()}
-      handleMouseDown={handleMouseDown}
-      curve={curve}
-    />
-  ));*/
   const nodes = state.nodes.map((node) => (
     <Node
       key={node.id.toString()}
       handleMouseDownOnNode={() => handleMouseDownOnNode(node.id)}
       handleMouseDown={handleMouseDown}
+      handleMouseUp={handleMouseUp}
       nodeData={node}
     />
   ));
@@ -195,26 +209,12 @@ const Panel = (props) => {
     <svg
       id="svgRoot"
       viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-      //ref={(node) => (this.node = node)}
       onMouseMove={(ev) => handleMouseMove(ev)}
-      onMouseUp={() => handleMouseUp()}
-      onMouseLeave={() => handleMouseUp()}
+      onMouseLeave={() => handleMouseLeave()}
     >
-      {
-        nodes /*<Node
-        handleMouseDownOnNode={() => handleMouseDownOnNode(0)}
-        handleMouseDown={handleMouseDown}
-        nodeData={state.nodes[0]}
-      />*/
-      }
+      {nodes}
     </svg>
   );
-};
-
-const getStartPoint = ({ x, y }, r, theta) => {
-  theta *= Math.PI / 180;
-  const result = { x: x + r * Math.cos(theta), y: y - r * Math.sin(theta) };
-  return result;
 };
 
 export default Panel;
