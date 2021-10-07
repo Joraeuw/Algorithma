@@ -1,6 +1,9 @@
+import { ArrowAngle } from '../../../staticFunctions';
+
 const BezierCurve = (props) => {
   const { startPoint, controlPoint1, controlPoint2, endPoint } = props.curve;
-  const { handleMouseDown, parentNodeId, isLeft } = props;
+  const { handleMouseDown, handleMouseUp, parentNodeId, isLeft } = props;
+
   const instructions = `
         M ${startPoint.x},${startPoint.y}
         C ${controlPoint1.x},${controlPoint1.y}
@@ -26,6 +29,7 @@ const BezierCurve = (props) => {
         coordinates={endPoint}
         crl2={controlPoint2}
         onMouseDown={() => handleMouseDown(parentNodeId, isLeft, 'endPoint')}
+        onMouseUp={() => handleMouseUp()}
       />
 
       <SmallHandle
@@ -33,6 +37,7 @@ const BezierCurve = (props) => {
         onMouseDown={() =>
           handleMouseDown(parentNodeId, isLeft, 'controlPoint1')
         }
+        onMouseUp={() => handleMouseUp()}
       />
 
       <SmallHandle
@@ -40,6 +45,7 @@ const BezierCurve = (props) => {
         onMouseDown={() =>
           handleMouseDown(parentNodeId, isLeft, 'controlPoint2')
         }
+        onMouseUp={() => handleMouseUp()}
       />
     </svg>
   );
@@ -62,7 +68,7 @@ const Curve = ({ instructions }) => (
     d={instructions}
     fill="none"
     stroke="rgb(213, 0, 249)"
-    strokeWidth={5}
+    strokeWidth={7}
   />
 );
 
@@ -77,7 +83,7 @@ const TailHandle = ({ coordinates, onMouseDown }) => (
     style={{ cursor: '-webkit-grab' }}
   />
 );
-const HeadHandle = ({ coordinates, onMouseDown, crl2: crl }) => {
+const HeadHandle = ({ coordinates, onMouseDown, crl2: crl, onMouseUp }) => {
   const { x, y } = coordinates;
   const h = 30;
   const point1 = {
@@ -98,6 +104,7 @@ const HeadHandle = ({ coordinates, onMouseDown, crl2: crl }) => {
     <polygon
       points={`${point1.x},${point1.y} ${point2.x},${point2.y} ${point3.x},${point3.y}`}
       onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
       style={{ cursor: '-webkit-grab' }}
       fill="rgb(244, 0, 137)"
       transform={`rotate(${rotation} ${x} ${y})`}
@@ -105,39 +112,7 @@ const HeadHandle = ({ coordinates, onMouseDown, crl2: crl }) => {
   );
 };
 
-//Calculating the angle at which the arrow must be displayed
-// 1. Evaluate the derivative at end point
-// 2. calculate the roration angle
-const ArrowAngle = (crl, end) => {
-  //Full bezie curve term
-  //const by =
-  //3 * (1 - t) ** 2 * (crl1.y - start.y) +
-  //6 * (1 - t) * t * (crl2.y - crl1.y) +
-  //3 * t ** 2 * (end.y - crl2.y);
-
-  // Fix at crl2.x === end.x
-  if (crl.x === end.x) return crl.y > end.y ? -30 : 30;
-
-  //determine in which quadrant the point is:
-  //Q1 adds 0 deg
-  let additional = 0;
-  //Q4 add 360 deg
-  if (crl.y > end.y && crl.x > end.x) additional = 360;
-  //Q2 and Q3 add 180 deg
-  else if (crl.x < end.x) additional = 180;
-
-  const unitVelocityVector = {
-    x: end.x - crl.x,
-    y: end.y - crl.y,
-  };
-
-  const theta =
-    (Math.atan(unitVelocityVector.y / unitVelocityVector.x) * 180) / Math.PI;
-
-  return theta + additional;
-};
-
-const SmallHandle = ({ coordinates, onMouseDown }) => (
+const SmallHandle = ({ coordinates, onMouseDown, onMouseUp }) => (
   <ellipse
     cx={coordinates.x}
     cy={coordinates.y}
@@ -147,6 +122,7 @@ const SmallHandle = ({ coordinates, onMouseDown }) => (
     stroke="rgb(244, 0, 137)"
     strokeWidth={2}
     onMouseDown={onMouseDown}
+    onMouseUp={onMouseUp}
     style={{ cursor: '-webkit-grab' }}
   />
 );
