@@ -1,9 +1,8 @@
-import './App.css';
 import RootDiv from './RootDiv.jsx';
 
 function App() {
   return (
-    <div className="App">
+    <div className="bg-gray-900">
       <RootDiv />
     </div>
   );

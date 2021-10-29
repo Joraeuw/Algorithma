@@ -4,6 +4,27 @@ const getStartPoint = ({ x, y }, r, theta) => {
   return result;
 };
 
+const isWithingPerimeter = (state, currentLocation) => {
+  for (const node of state.nodes) {
+    const area = node.parentConnectionArea;
+    //Distance between currentLocation and node.ParrentConnectionArea.position
+    const distance = Math.sqrt(
+      Math.pow(area.x - currentLocation.x, 2) +
+        Math.pow(area.y - currentLocation.y, 2)
+    );
+    if (distance <= area.r) return [true, node];
+  }
+  return [false, null];
+};
+
+const getEndAndControlPoint = ({ x, y }, r, theta, offsetX, offsetY) => {
+  theta *= Math.PI / 180;
+  const result = {
+    x: x + r * Math.cos(theta) + offsetX,
+    y: y - r * Math.sin(theta) + offsetY,
+  };
+  return result;
+};
 //Calculating the angle at which the arrow must be displayed
 // 1. Evaluate the derivative at end point
 // 2. calculate the roration angle
@@ -36,4 +57,4 @@ const ArrowAngle = (crl, end) => {
 
   return theta + additional;
 };
-export { getStartPoint, ArrowAngle };
+export { getStartPoint, ArrowAngle, getEndAndControlPoint, isWithingPerimeter };
