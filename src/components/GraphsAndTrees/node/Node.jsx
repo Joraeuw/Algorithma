@@ -2,9 +2,12 @@ import BezierCurve from './BezierCurve';
 import Text from 'react-svg-text';
 import './node.module.css';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Node = (props) => {
-  const node = props.nodeData;
+  const id = props.nodeId;
+  const node = useSelector((state) => state.panelState).nodes[id];
+
   const {
     handleMouseDown,
     handleMouseDownOnNode,
