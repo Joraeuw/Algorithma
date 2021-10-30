@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import store from '../../redux/store';
 
 //Mouse Handlers
@@ -10,23 +9,12 @@ import handleMouseDownOnNode from './MouseEvents/handleMouseDownOnNode';
 import handleMouseMove from './MouseEvents/handleMouseMove';
 
 import Node from './node/Node';
+const state = store.getState().panelState;
 
 const Panel = (props) => {
-  const state = store.getState().panelState;
   const viewBoxWidth = 1500;
   const viewBoxHeight = 1500;
-
-  const nodes = state.nodes.map((node) => (
-    <Node
-      key={node.id.toString()}
-      handleMouseDownOnNode={() => handleMouseDownOnNode(node.id)}
-      handleMouseUpOnNode={handleMouseUpOnNode}
-      handleMouseDown={handleMouseDown}
-      handleMouseUp={handleMouseUp}
-      nodeId={node.id}
-    />
-  ));
-
+  //console.log(nodes);
   return (
     <svg
       id="svgRoot"
@@ -38,5 +26,16 @@ const Panel = (props) => {
     </svg>
   );
 };
+
+const nodes = Object.keys(state.nodes).map((nodeId) => (
+  <Node
+    key={nodeId}
+    handleMouseDownOnNode={() => handleMouseDownOnNode(nodeId)}
+    handleMouseUpOnNode={handleMouseUpOnNode}
+    handleMouseDown={handleMouseDown}
+    handleMouseUp={handleMouseUp}
+    nodeId={nodeId}
+  />
+));
 
 export default Panel;

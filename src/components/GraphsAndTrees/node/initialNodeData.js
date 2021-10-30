@@ -12,12 +12,11 @@ const startInitL2 = getStartPoint(init2.position, init2.r, 225);
 const stateInit = {
   nodes: [
     {
-      id: init.id,
+      id: 'whateverTheDUCKINGStringOR NUM u want',
       r: init.r,
       position: init.position,
       value: 'node0',
       rightCurve: {
-        id: 0,
         childId: 1,
         isConnected: false,
         //perfect
@@ -30,7 +29,6 @@ const stateInit = {
         endPoint: { x: startInitR.x + 1, y: startInitR.y + 1 },
       },
       leftCurve: {
-        id: 1,
         child: 'node2',
         isConnected: false,
         startPoint: startInitL,
@@ -51,7 +49,6 @@ const stateInit = {
       position: { x: 300, y: 300 },
       value: 'node1',
       rightCurve: {
-        id: 0,
         childId: null,
         isConnected: false,
         startPoint: startInitR2,
@@ -60,7 +57,6 @@ const stateInit = {
         endPoint: { x: startInitR2.x + 1, y: startInitR2.y + 1 },
       },
       leftCurve: {
-        id: 1,
         child: 'node2',
         isConnected: false,
         startPoint: startInitL2,

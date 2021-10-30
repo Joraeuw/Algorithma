@@ -22,14 +22,14 @@ const Node = (props) => {
         handleMouseDown={handleMouseDown}
         handleMouseUp={handleMouseUp}
         isLeft={true}
-        parentNodeId={node.id}
+        parentNodeId={id}
         curve={node.leftCurve}
       />
       <BezierCurve
         handleMouseDown={handleMouseDown}
         handleMouseUp={handleMouseUp}
         isLeft={false}
-        parentNodeId={node.id}
+        parentNodeId={id}
         curve={node.rightCurve}
       />
       <ellipse

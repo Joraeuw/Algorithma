@@ -1,28 +1,31 @@
-import { SetDraggingObjectId } from '../../../redux/actions/setDraggingObjectId';
 import { setOverallState } from '../../../redux/actions/setOverallState';
 import store from '../../../redux/store';
 import { getStartPoint, getEndAndControlPoint } from '../../../staticFunctions';
-import { stateInit, offset, init2 } from '../node/initialNodeData';
+import { offset, init2 } from '../node/initialNodeData';
 
 const handleMouseMove = ({ clientX, clientY }) => {
   const viewBoxWidth = 1500;
   const viewBoxHeight = 1500;
 
-  const state = store.getState().panelState;
-  const { draggingObjectId } = state;
+  //Might be improvable by taking draggingObjectId directly and afrter if creating the state
+  const draggingObjectId = store.getState().panelState.draggingObjectId;
   if (!draggingObjectId) {
     return;
   }
+  const state = store.getState().panelState;
 
+  //Control svg size relative to parent size
   const svgRect = document.querySelector('#svgRoot').getBoundingClientRect();
 
   const svgX = clientX - svgRect.left;
   const svgY = clientY - svgRect.top;
+
+  //Mouse position
   const viewBoxX = (svgX * viewBoxWidth) / svgRect.width;
   const viewBoxY = (svgY * viewBoxHeight) / svgRect.height;
 
   let newState = { ...state };
-
+  //Node controls
   if (draggingObjectId.nodeId != null) {
     const nodeId = draggingObjectId.nodeId;
     const node = newState.nodes[nodeId];
@@ -38,6 +41,7 @@ const handleMouseMove = ({ clientX, clientY }) => {
         -1,
         1
       );
+      //THIS NEEDS FIXING
       node.leftCurve.controlPoint1 = node.leftCurve.startPoint;
 
       node.leftCurve.controlPoint2 = node.leftCurve.startPoint;
@@ -57,10 +61,11 @@ const handleMouseMove = ({ clientX, clientY }) => {
     store.dispatch(setOverallState(newState));
     return;
   }
-
+  //Arrow controls
   const isLeft = draggingObjectId.isLeft;
   const parentNodeId = draggingObjectId.parentNodeId;
 
+  //Hanldels endPoint movement
   if (state.draggingObjectId.pointProp === 'startPoint') return;
   else if (state.draggingObjectId.pointProp === 'endPoint') {
     if (isLeft) {
@@ -69,7 +74,7 @@ const handleMouseMove = ({ clientX, clientY }) => {
         y: viewBoxY,
       };
       //newState.nodes[parentNodeId].leftCurve.controlPoint1.y = viewBoxY;
-      newState.nodes[parentNodeId].leftCurve.controlPoint2.x = viewBoxX;
+      //newState.nodes[parentNodeId].leftCurve.controlPoint2.x = viewBoxX;
     } else {
       newState.nodes[parentNodeId].rightCurve.endPoint = {
         x: viewBoxX,
