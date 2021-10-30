@@ -1,6 +1,11 @@
 import { stateInit } from '../../components/GraphsAndTrees/node/initialNodeData';
+import { nodesIdMap } from '../../staticFunctions';
 
-const NodesStateReducer = (state = stateInit, action) => {
+const NodesStateReducer = (
+  state = { ...stateInit, nodes: nodesIdMap(stateInit.nodes) },
+  action
+) => {
+  //console.log(state.nodes[1])
   switch (action.type) {
     case 'SET_DRAGGING_OBJECT_ID':
       return { ...state, draggingObjectId: action.payload.draggingObjectId };

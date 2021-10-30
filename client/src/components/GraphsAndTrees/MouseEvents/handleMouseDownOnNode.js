@@ -7,7 +7,6 @@ const handleMouseDownOnNode = (nodeId) => {
   newState.draggingObjectId = { nodeId };
 
   store.dispatch(SetDraggingObjectId(newState.draggingObjectId));
-  console.log(newState);
 };
 
 export default handleMouseDownOnNode;

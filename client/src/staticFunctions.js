@@ -5,7 +5,8 @@ const getStartPoint = ({ x, y }, r, theta) => {
 };
 
 const isWithingPerimeter = (state, currentLocation) => {
-  for (const node of state.nodes) {
+  for (const nodeId in state.nodes) {
+    const node = state.nodes[nodeId];
     const area = node.parentConnectionArea;
     //Distance between currentLocation and node.ParrentConnectionArea.position
     const distance = Math.sqrt(
@@ -17,6 +18,7 @@ const isWithingPerimeter = (state, currentLocation) => {
   return [false, null];
 };
 
+//Determines the position of the end point
 const getEndAndControlPoint = ({ x, y }, r, theta, offsetX, offsetY) => {
   theta *= Math.PI / 180;
   const result = {
@@ -52,9 +54,26 @@ const ArrowAngle = (crl, end) => {
     y: end.y - crl.y,
   };
 
+  //Angle of arrow
   const theta =
     (Math.atan(unitVelocityVector.y / unitVelocityVector.x) * 180) / Math.PI;
 
   return theta + additional;
 };
-export { getStartPoint, ArrowAngle, getEndAndControlPoint, isWithingPerimeter };
+
+const nodesIdMap = (flatArrayOfNodes) =>
+  flatArrayOfNodes.reduce(
+    (state, node) => ({
+      ...state,
+      [node.id]: node,
+    }),
+    {}
+  );
+
+export {
+  getStartPoint,
+  ArrowAngle,
+  getEndAndControlPoint,
+  isWithingPerimeter,
+  nodesIdMap,
+};
