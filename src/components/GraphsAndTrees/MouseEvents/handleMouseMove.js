@@ -3,7 +3,7 @@ import store from '../../../redux/store';
 import { getStartPoint, getEndAndControlPoint } from '../../../staticFunctions';
 import { offset, init2 } from '../node/initialNodeData';
 
-const handleMouseMove = ({ clientX, clientY }) => {
+const handleMouseMove = async ({ clientX, clientY }) => {
   const viewBoxWidth = 1500;
   const viewBoxHeight = 1500;
 
@@ -29,9 +29,11 @@ const handleMouseMove = ({ clientX, clientY }) => {
   if (draggingObjectId.nodeId != null) {
     const nodeId = draggingObjectId.nodeId;
     const node = newState.nodes[nodeId];
+
     node.position = { x: viewBoxX, y: viewBoxY };
     node.rightCurve.startPoint = getStartPoint(node.position, node.r, -45);
     node.leftCurve.startPoint = getStartPoint(node.position, node.r, 225);
+
     if (!node.leftCurve.isConnected) {
       //LeftCurve
       node.leftCurve.endPoint = getEndAndControlPoint(
@@ -41,9 +43,9 @@ const handleMouseMove = ({ clientX, clientY }) => {
         -1,
         1
       );
+
       //THIS NEEDS FIXING
       node.leftCurve.controlPoint1 = node.leftCurve.startPoint;
-
       node.leftCurve.controlPoint2 = node.leftCurve.startPoint;
     }
     if (!node.rightCurve.isConnected) {

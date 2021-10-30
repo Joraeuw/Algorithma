@@ -5,7 +5,6 @@ const NodesStateReducer = (
   state = { ...stateInit, nodes: nodesIdMap(stateInit.nodes) },
   action
 ) => {
-  //console.log(state.nodes[1])
   switch (action.type) {
     case 'SET_DRAGGING_OBJECT_ID':
       return { ...state, draggingObjectId: action.payload.draggingObjectId };
@@ -13,6 +12,8 @@ const NodesStateReducer = (
       return parentConnectionArea(state, action.payload);
     case 'SET_OVERALL_STATE':
       return action.payload.state;
+    case 'ADD_NEW_NODE':
+      return addNewNode(state, action.payload);
     default:
       return state;
   }
@@ -26,4 +27,8 @@ const parentConnectionArea = (state, { isLeft, node, curve }) => {
   else newState.nodes[node.id].rightCurve = curve;
 
   return newState;
+};
+
+const addNewNode = (state, { newNode }) => {
+  return (state[newNode.id] = newNode);
 };

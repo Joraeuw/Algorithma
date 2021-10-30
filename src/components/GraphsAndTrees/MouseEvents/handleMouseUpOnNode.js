@@ -1,4 +1,4 @@
-import { SetDraggingObjectId } from '../../../redux/actions/setDraggingObjectId';
+import { setDraggingObjectId } from '../../../redux/actions/setDraggingObjectId';
 import store from '../../../redux/store';
 import { setOverallState } from '../../../redux/actions/setOverallState';
 

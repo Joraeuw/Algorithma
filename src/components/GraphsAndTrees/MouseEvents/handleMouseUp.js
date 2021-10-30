@@ -1,4 +1,4 @@
-import { SetDraggingObjectId } from '../../../redux/actions/setDraggingObjectId';
+import { setDraggingObjectId } from '../../../redux/actions/setDraggingObjectId';
 import store from '../../../redux/store';
 import { isWithingPerimeter } from '../../../staticFunctions';
 import { setOverallState } from '../../../redux/actions/setOverallState';
@@ -11,7 +11,7 @@ const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
 
   //If node Id is not provided we setState and return
   if (nodeId === -1) {
-    store.dispatch(SetDraggingObjectId(newState.draggingObjectId));
+    store.dispatch(setDraggingObjectId(newState.draggingObjectId));
     return;
   }
 
@@ -29,12 +29,14 @@ const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
     curve.endPoint.y = node.parentConnectionArea.y;
     curve.isConnected = true;
 
-    /*
-      if (isLeft) {
-        newState.nodes[nodeId].leftCurve = curve;
-      } else {
-        newState.nodes[nodeId].rightCurve = curve;
-      }*/
+    //Determines how the ctrl points should be positioned
+    if (isLeft) {
+      curve.controlPoint1 = { x: curve.controlPoint1.x, y: curve.endPoint.y };
+      curve.controlPoint2 = { x: curve.endPoint.x, y: curve.controlPoint2.y };
+    } else {
+      curve.controlPoint1 = { x: curve.controlPoint1.x, y: curve.endPoint.y };
+      curve.controlPoint2 = { x: curve.endPoint.x, y: curve.controlPoint2.y };
+    }
   } else {
     //determines the position of the endPoint relative to ctrl2
     curve.endPoint.x = isLeft
