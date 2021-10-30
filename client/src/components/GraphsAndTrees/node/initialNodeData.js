@@ -71,6 +71,70 @@ const stateInit = {
         y: init2.position.y - init2.r + offset,
       },
     },
+    {
+      id: '4324',
+      r: init.r,
+      position: init.position,
+      value: 'node0',
+      rightCurve: {
+        childId: 1,
+        isConnected: false,
+        //perfect
+        startPoint: startInitR,
+        //shit
+        controlPoint1: startInitR,
+        //shit
+        controlPoint2: startInitR,
+        //shit
+        endPoint: { x: startInitR.x + 1, y: startInitR.y + 1 },
+      },
+      leftCurve: {
+        child: 'node2',
+        isConnected: false,
+        startPoint: startInitL,
+        controlPoint1: startInitL,
+        controlPoint2: startInitL,
+        endPoint: { x: startInitL.x - 1, y: startInitL.y + 1 },
+      },
+
+      parentConnectionArea: {
+        r: initR,
+        x: init.position.x,
+        y: init.position.y - init.r + offset,
+      },
+    },
+    {
+      id: 'wrtfyhugf',
+      r: init.r,
+      position: init.position,
+      value: 'node0',
+      rightCurve: {
+        childId: 1,
+        isConnected: false,
+        //perfect
+        startPoint: startInitR,
+        //shit
+        controlPoint1: startInitR,
+        //shit
+        controlPoint2: startInitR,
+        //shit
+        endPoint: { x: startInitR.x + 1, y: startInitR.y + 1 },
+      },
+      leftCurve: {
+        child: 'node2',
+        isConnected: false,
+        startPoint: startInitL,
+        controlPoint1: startInitL,
+        controlPoint2: startInitL,
+        endPoint: { x: startInitL.x - 1, y: startInitL.y + 1 },
+      },
+
+      parentConnectionArea: {
+        r: initR,
+        x: init.position.x,
+        y: init.position.y - init.r + offset,
+      },
+    },
   ],
   draggingObjectId: null,
 };

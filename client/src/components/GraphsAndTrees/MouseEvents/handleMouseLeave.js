@@ -1,4 +1,4 @@
-import { SetDraggingObjectId } from '../../../redux/actions/setDraggingObjectId';
+import { setDraggingObjectId } from '../../../redux/actions/setDraggingObjectId';
 import store from '../../../redux/store';
 
 const handleMouseLeave = () => {
@@ -6,7 +6,7 @@ const handleMouseLeave = () => {
   let newState = { ...state };
   newState.draggingObjectId = null;
 
-  store.dispatch(SetDraggingObjectId(newState.draggingObjectId));
+  store.dispatch(setDraggingObjectId(newState.draggingObjectId));
 };
 
 export default handleMouseLeave;
