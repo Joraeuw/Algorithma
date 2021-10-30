@@ -12,12 +12,14 @@ const startInitL2 = getStartPoint(init2.position, init2.r, 225);
 const stateInit = {
   nodes: [
     {
-      id: 'whateverTheDUCKINGStringOR NUM u want',
+      id: 'node0',
+      parentNodeId: null,
       r: init.r,
       position: init.position,
       value: 'node0',
       rightCurve: {
-        childId: 1,
+        childId: null,
+        baseId: 'node0',
         isConnected: false,
         //perfect
         startPoint: startInitR,
@@ -29,7 +31,8 @@ const stateInit = {
         endPoint: { x: startInitR.x + 1, y: startInitR.y + 1 },
       },
       leftCurve: {
-        child: 'node2',
+        childId: null,
+        baseId: 'node0',
         isConnected: false,
         startPoint: startInitL,
         controlPoint1: startInitL,
@@ -44,12 +47,14 @@ const stateInit = {
       },
     },
     {
-      id: 1,
+      id: 'node1',
+      parentNodeId: null,
       r: init2.r,
       position: { x: 300, y: 300 },
       value: 'node1',
       rightCurve: {
         childId: null,
+        baseId: 'node1',
         isConnected: false,
         startPoint: startInitR2,
         controlPoint1: startInitR2,
@@ -57,7 +62,8 @@ const stateInit = {
         endPoint: { x: startInitR2.x + 1, y: startInitR2.y + 1 },
       },
       leftCurve: {
-        child: 'node2',
+        childId: null,
+        baseId: 'node1',
         isConnected: false,
         startPoint: startInitL2,
         controlPoint1: startInitL2,
@@ -72,67 +78,65 @@ const stateInit = {
       },
     },
     {
-      id: '4324',
-      r: init.r,
-      position: init.position,
-      value: 'node0',
+      id: 'node2',
+      parentNodeId: null,
+      r: init2.r,
+      position: { x: 300, y: 300 },
+      value: 'node2',
       rightCurve: {
-        childId: 1,
+        childId: null,
+        baseId: 'node2',
         isConnected: false,
-        //perfect
-        startPoint: startInitR,
-        //shit
-        controlPoint1: startInitR,
-        //shit
-        controlPoint2: startInitR,
-        //shit
-        endPoint: { x: startInitR.x + 1, y: startInitR.y + 1 },
+        startPoint: startInitR2,
+        controlPoint1: startInitR2,
+        controlPoint2: startInitR2,
+        endPoint: { x: startInitR2.x + 1, y: startInitR2.y + 1 },
       },
       leftCurve: {
-        child: 'node2',
+        childId: null,
+        baseId: 'node2',
         isConnected: false,
-        startPoint: startInitL,
-        controlPoint1: startInitL,
-        controlPoint2: startInitL,
-        endPoint: { x: startInitL.x - 1, y: startInitL.y + 1 },
+        startPoint: startInitL2,
+        controlPoint1: startInitL2,
+        controlPoint2: startInitL2,
+        endPoint: { x: startInitL2.x - 1, y: startInitL2.y + 1 },
       },
 
       parentConnectionArea: {
         r: initR,
-        x: init.position.x,
-        y: init.position.y - init.r + offset,
+        x: init2.position.x,
+        y: init2.position.y - init2.r + offset,
       },
     },
     {
-      id: 'wrtfyhugf',
-      r: init.r,
-      position: init.position,
-      value: 'node0',
+      id: 'node3',
+      parentNodeId: null,
+      r: init2.r,
+      position: { x: 300, y: 300 },
+      value: 'node3',
       rightCurve: {
-        childId: 1,
+        childId: null,
+        baseId: 'node3',
         isConnected: false,
-        //perfect
-        startPoint: startInitR,
-        //shit
-        controlPoint1: startInitR,
-        //shit
-        controlPoint2: startInitR,
-        //shit
-        endPoint: { x: startInitR.x + 1, y: startInitR.y + 1 },
+        startPoint: startInitR2,
+        controlPoint1: startInitR2,
+        controlPoint2: startInitR2,
+        endPoint: { x: startInitR2.x + 1, y: startInitR2.y + 1 },
       },
       leftCurve: {
-        child: 'node2',
+        childId: null,
+        baseId: 'node3',
         isConnected: false,
-        startPoint: startInitL,
-        controlPoint1: startInitL,
-        controlPoint2: startInitL,
-        endPoint: { x: startInitL.x - 1, y: startInitL.y + 1 },
+        startPoint: startInitL2,
+        controlPoint1: startInitL2,
+        controlPoint2: startInitL2,
+        endPoint: { x: startInitL2.x - 1, y: startInitL2.y + 1 },
       },
 
       parentConnectionArea: {
         r: initR,
-        x: init.position.x,
-        y: init.position.y - init.r + offset,
+        x: init2.position.x,
+        y: init2.position.y - init2.r + offset,
       },
     },
   ],

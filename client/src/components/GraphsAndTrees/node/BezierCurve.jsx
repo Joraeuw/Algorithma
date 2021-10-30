@@ -111,7 +111,7 @@ const HeadHandle = ({ coordinates, onMouseDown, crl2: crl, onMouseUp }) => {
     />
   );
 };
-//"rgb(244, 0, 137)"
+
 const SmallHandle = ({ coordinates, onMouseDown, onMouseUp }) => (
   <ellipse
     cx={coordinates.x}
@@ -119,7 +119,7 @@ const SmallHandle = ({ coordinates, onMouseDown, onMouseUp }) => (
     rx={8}
     ry={8}
     fill="transparent"
-    stroke="rgb(0, 0, 137)"
+    stroke="rgb(244, 0, 137)"
     strokeWidth={2}
     onMouseDown={onMouseDown}
     onMouseUp={onMouseUp}
