@@ -28,6 +28,8 @@ const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
     curve.endPoint.x = node.parentConnectionArea.x;
     curve.endPoint.y = node.parentConnectionArea.y;
     curve.isConnected = true;
+    curve.childId = node.id;
+    node.parentNodeId = curve.baseId;
 
     //Determines how the ctrl points should be positioned
     if (isLeft) {

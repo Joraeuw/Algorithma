@@ -59,7 +59,25 @@ const handleMouseMove = async ({ clientX, clientY }) => {
       node.rightCurve.controlPoint1 = node.rightCurve.startPoint;
       node.rightCurve.controlPoint2 = node.rightCurve.startPoint;
     }
+
     setParentConnectionArea(newState, nodeId);
+
+    if (node.parentNodeId) {
+      const parentNode = newState.nodes[node.parentNodeId];
+      if (parentNode.leftCurve.childId == nodeId) {
+        parentNode.leftCurve.endPoint = {
+          x: node.parentConnectionArea.x,
+          y: node.parentConnectionArea.y,
+        };
+      } else if (parentNode.rightCurve.childId == nodeId) {
+        parentNode.rightCurve.endPoint = {
+          x: node.parentConnectionArea.x,
+          y: node.parentConnectionArea.y,
+        };
+      }
+      newState.nodes[parentNode.id] = parentNode;
+    }
+
     store.dispatch(setOverallState(newState));
     return;
   }
