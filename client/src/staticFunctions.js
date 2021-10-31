@@ -19,7 +19,7 @@ const isWithingPerimeter = (state, currentLocation) => {
 };
 
 //Determines the position of the end point
-const getEndAndControlPoint = ({ x, y }, r, theta, offsetX, offsetY) => {
+const recalculateEndPoint = ({ x, y }, r, theta, offsetX, offsetY) => {
   theta *= Math.PI / 180;
   const result = {
     x: x + r * Math.cos(theta) + offsetX,
@@ -73,7 +73,7 @@ const nodesIdMap = (flatArrayOfNodes) =>
 export {
   getStartPoint,
   ArrowAngle,
-  getEndAndControlPoint,
+  recalculateEndPoint as getEndAndControlPoint,
   isWithingPerimeter,
   nodesIdMap,
 };
