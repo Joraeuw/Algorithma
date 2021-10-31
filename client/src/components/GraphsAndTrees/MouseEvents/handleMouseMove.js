@@ -93,15 +93,30 @@ const handleMouseMove = async ({ clientX, clientY }) => {
         x: viewBoxX,
         y: viewBoxY,
       };
-      //newState.nodes[parentNodeId].leftCurve.controlPoint1.y = viewBoxY;
-      //newState.nodes[parentNodeId].leftCurve.controlPoint2.x = viewBoxX;
+      //Determines the position of the ctrl1 and ctrl2 for leftCurve
+      newState.nodes[parentNodeId].leftCurve.controlPoint1 = {
+        x: newState.nodes[parentNodeId].leftCurve.controlPoint1.x,
+        y: viewBoxY,
+      };
+      newState.nodes[parentNodeId].leftCurve.controlPoint2 = {
+        x: viewBoxX,
+        y: newState.nodes[parentNodeId].leftCurve.controlPoint2.y,
+      };
     } else {
       newState.nodes[parentNodeId].rightCurve.endPoint = {
         x: viewBoxX,
         y: viewBoxY,
       };
-      //newState.nodes[parentNodeId].rightCurve.controlPoint1.y = viewBoxY;
-      //newState.nodes[parentNodeId].rightCurve.controlPoint2.x = viewBoxX;
+
+      //Determines the position of the ctrl1 and ctrl2 for rightCurve
+      newState.nodes[parentNodeId].rightCurve.controlPoint1 = {
+        x: newState.nodes[parentNodeId].rightCurve.controlPoint1.x,
+        y: viewBoxY,
+      };
+      newState.nodes[parentNodeId].rightCurve.controlPoint2 = {
+        x: viewBoxX,
+        y: newState.nodes[parentNodeId].rightCurve.controlPoint2.y,
+      };
     }
   } else if (state.draggingObjectId.pointProp === 'controlPoint1')
     if (isLeft)

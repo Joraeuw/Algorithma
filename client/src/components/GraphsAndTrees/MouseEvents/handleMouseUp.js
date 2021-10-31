@@ -40,6 +40,9 @@ const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
       curve.controlPoint2 = { x: curve.endPoint.x, y: curve.controlPoint2.y };
     }
   } else {
+    //reset ctrl1 and ctrl2 position
+    curve.controlPoint1 = { ...curve.startPoint };
+    curve.controlPoint2 = { ...curve.startPoint };
     //determines the position of the endPoint relative to ctrl2
     curve.endPoint.x = isLeft
       ? curve.controlPoint2.x - 1

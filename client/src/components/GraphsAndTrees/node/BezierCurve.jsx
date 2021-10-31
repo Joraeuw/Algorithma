@@ -1,8 +1,14 @@
+import { useState } from 'react';
 import { ArrowAngle } from '../../../staticFunctions';
 
 const BezierCurve = (props) => {
   const { startPoint, controlPoint1, controlPoint2, endPoint } = props.curve;
   const { handleMouseDown, handleMouseUp, parentNodeId, isLeft } = props;
+  const [isSelected, setIsSelected] = useState(false);
+
+  const switchIsSelected = () => {
+    setIsSelected(!isSelected);
+  };
 
   const instructions = `
         M ${startPoint.x},${startPoint.y}
@@ -18,10 +24,18 @@ const BezierCurve = (props) => {
         border: '1px solid',
       }}
     >
-      <ConnectingLine from={startPoint} to={controlPoint1} />
-      <ConnectingLine from={controlPoint2} to={endPoint} />
+      <ConnectingLine
+        from={startPoint}
+        to={controlPoint1}
+        isSelected={isSelected}
+      />
+      <ConnectingLine
+        from={controlPoint2}
+        to={endPoint}
+        isSelected={isSelected}
+      />
 
-      <Curve instructions={instructions} />
+      <Curve instructions={instructions} switchIsSelected={switchIsSelected} />
 
       <TailHandle coordinates={startPoint} />
 
@@ -31,6 +45,7 @@ const BezierCurve = (props) => {
           handleMouseDown(parentNodeId, isLeft, 'controlPoint1')
         }
         onMouseUp={() => handleMouseUp()}
+        isSelected={isSelected}
       />
 
       <SmallHandle
@@ -39,6 +54,7 @@ const BezierCurve = (props) => {
           handleMouseDown(parentNodeId, isLeft, 'controlPoint2')
         }
         onMouseUp={() => handleMouseUp()}
+        isSelected={isSelected}
       />
 
       <HeadHandle
@@ -51,24 +67,25 @@ const BezierCurve = (props) => {
   );
 };
 
-const ConnectingLine = ({ from, to }) => (
+const ConnectingLine = ({ from, to, isSelected }) => (
   <line
     x1={from.x}
     y1={from.y}
-    x2={to.x}
-    y2={to.y}
+    x2={isSelected ? to.x : from.x}
+    y2={isSelected ? to.y : from.y}
     stroke="rgb(200, 200, 200)"
     strokeDasharray="5,5"
     strokeWidth={2}
   />
 );
 
-const Curve = ({ instructions }) => (
+const Curve = ({ instructions, switchIsSelected }) => (
   <path
     d={instructions}
     fill="none"
     stroke="rgb(213, 0, 249)"
     strokeWidth={5}
+    onClick={switchIsSelected}
   />
 );
 
@@ -80,7 +97,7 @@ const TailHandle = ({ coordinates, onMouseDown }) => (
     ry={1}
     fill="rgb(244, 0, 137)"
     onMouseDown={onMouseDown}
-    style={{ cursor: '-webkit-grab' }}
+    className="cursor-drag"
   />
 );
 const HeadHandle = ({ coordinates, onMouseDown, crl2: crl, onMouseUp }) => {
@@ -105,25 +122,25 @@ const HeadHandle = ({ coordinates, onMouseDown, crl2: crl, onMouseUp }) => {
       points={`${point1.x},${point1.y} ${point2.x},${point2.y} ${point3.x},${point3.y}`}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
-      style={{ cursor: '-webkit-grab' }}
+      className="cursor-drag"
       fill="rgb(244, 0, 137)"
       transform={`rotate(${rotation} ${x} ${y})`}
     />
   );
 };
 
-const SmallHandle = ({ coordinates, onMouseDown, onMouseUp }) => (
+const SmallHandle = ({ coordinates, onMouseDown, onMouseUp, isSelected }) => (
   <ellipse
     cx={coordinates.x}
     cy={coordinates.y}
-    rx={8}
-    ry={8}
+    rx={isSelected ? 8 : 0}
+    ry={isSelected ? 8 : 0}
     fill="transparent"
     stroke="rgb(244, 0, 137)"
     strokeWidth={2}
     onMouseDown={onMouseDown}
     onMouseUp={onMouseUp}
-    style={{ cursor: '-webkit-grab' }}
+    className="cursor-drag scale-0"
   />
 );
 
