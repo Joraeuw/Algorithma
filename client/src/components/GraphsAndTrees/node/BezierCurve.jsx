@@ -29,11 +29,7 @@ const BezierCurve = (props) => {
         to={controlPoint1}
         isSelected={isSelected}
       />
-      <ConnectingLine
-        from={controlPoint2}
-        to={endPoint}
-        isSelected={isSelected}
-      />
+      <ConnectingLine from={controlPoint2} to={endPoint} isSelected={false} />
 
       <Curve instructions={instructions} switchIsSelected={switchIsSelected} />
 
@@ -54,7 +50,7 @@ const BezierCurve = (props) => {
           handleMouseDown(parentNodeId, isLeft, 'controlPoint2')
         }
         onMouseUp={() => handleMouseUp()}
-        isSelected={isSelected}
+        isSelected={false}
       />
 
       <HeadHandle
@@ -115,8 +111,17 @@ const HeadHandle = ({ coordinates, onMouseDown, crl2: crl, onMouseUp }) => {
     x: x - (2 * h) / 3,
     y: y,
   };
-  const rotation = ArrowAngle(crl, coordinates);
 
+  /*const point1 = { x, y };
+  const point2 = {
+    x: x + (Math.sqrt(3) / 3) * h,
+    y: y - h,
+  };
+  const point3 = {
+    x: x - (Math.sqrt(3) / 3) * h,
+    y: y - h,
+  };*/
+  const rotation = ArrowAngle(crl, coordinates);
   return (
     <polygon
       points={`${point1.x},${point1.y} ${point2.x},${point2.y} ${point3.x},${point3.y}`}

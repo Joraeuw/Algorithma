@@ -28,7 +28,7 @@ const stateInit = {
         //shit
         controlPoint2: startInitR,
         //shit
-        endPoint: { x: startInitR.x + 1, y: startInitR.y + 1 },
+        endPoint: { x: startInitR.x, y: startInitR.y },
       },
       leftCurve: {
         childId: null,
