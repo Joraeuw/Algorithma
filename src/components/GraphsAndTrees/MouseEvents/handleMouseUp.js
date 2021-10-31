@@ -25,8 +25,11 @@ const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
   );
 
   if (isWithinPerimeter) {
+    //2/3rds of triangle h
+    const z2_3 = 20 - 1;
+
     curve.endPoint.x = node.parentConnectionArea.x;
-    curve.endPoint.y = node.parentConnectionArea.y;
+    curve.endPoint.y = node.parentConnectionArea.y - z2_3;
     curve.isConnected = true;
     curve.childId = node.id;
     node.parentNodeId = curve.baseId;

@@ -63,16 +63,29 @@ const handleMouseMove = async ({ clientX, clientY }) => {
     setParentConnectionArea(newState, nodeId);
 
     if (node.parentNodeId) {
+      //2/3rds of triangle h
+      const z2_3 = 20 - 1;
       const parentNode = newState.nodes[node.parentNodeId];
+
       if (parentNode.leftCurve.childId == nodeId) {
         parentNode.leftCurve.endPoint = {
           x: node.parentConnectionArea.x,
-          y: node.parentConnectionArea.y,
+          y: node.parentConnectionArea.y - z2_3,
+        };
+        //Change the ctrl2 on parent to prevent weird alignment
+        parentNode.leftCurve.controlPoint2 = {
+          x: parentNode.leftCurve.endPoint.x,
+          y: parentNode.leftCurve.controlPoint2.y,
         };
       } else if (parentNode.rightCurve.childId == nodeId) {
         parentNode.rightCurve.endPoint = {
           x: node.parentConnectionArea.x,
-          y: node.parentConnectionArea.y,
+          y: node.parentConnectionArea.y - z2_3,
+        };
+        //Change the ctrl2 on parent to prevent weird alignment
+        parentNode.rightCurve.controlPoint2 = {
+          x: parentNode.rightCurve.endPoint.x,
+          y: parentNode.rightCurve.controlPoint2.y,
         };
       }
       newState.nodes[parentNode.id] = parentNode;
