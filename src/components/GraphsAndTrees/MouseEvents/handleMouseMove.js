@@ -94,62 +94,62 @@ const handleMouseMove = async ({ clientX, clientY }) => {
     store.dispatch(setOverallState(newState));
     return;
   }
-  //Arrow controls
+  //Arrow/Curve controls
   const isLeft = draggingObjectId.isLeft;
   const parentNodeId = draggingObjectId.parentNodeId;
-
+  const parentNode = newState.nodes[parentNodeId];
   //Hanldels endPoint movement
   if (state.draggingObjectId.pointProp === 'startPoint') return;
   else if (state.draggingObjectId.pointProp === 'endPoint') {
     if (isLeft) {
-      newState.nodes[parentNodeId].leftCurve.endPoint = {
+      parentNode.leftCurve.endPoint = {
         x: viewBoxX,
         y: viewBoxY,
       };
       //Determines the position of the ctrl1 and ctrl2 for leftCurve
-      newState.nodes[parentNodeId].leftCurve.controlPoint1 = {
-        x: newState.nodes[parentNodeId].leftCurve.controlPoint1.x,
+      parentNode.leftCurve.controlPoint1 = {
+        x: parentNode.leftCurve.controlPoint1.x,
         y: viewBoxY,
       };
-      newState.nodes[parentNodeId].leftCurve.controlPoint2 = {
+      parentNode.leftCurve.controlPoint2 = {
         x: viewBoxX,
-        y: newState.nodes[parentNodeId].leftCurve.controlPoint2.y,
+        y: parentNode.leftCurve.controlPoint2.y,
       };
     } else {
-      newState.nodes[parentNodeId].rightCurve.endPoint = {
+      parentNode.rightCurve.endPoint = {
         x: viewBoxX,
         y: viewBoxY,
       };
 
       //Determines the position of the ctrl1 and ctrl2 for rightCurve
-      newState.nodes[parentNodeId].rightCurve.controlPoint1 = {
-        x: newState.nodes[parentNodeId].rightCurve.controlPoint1.x,
+      parentNode.rightCurve.controlPoint1 = {
+        x: parentNode.rightCurve.controlPoint1.x,
         y: viewBoxY,
       };
-      newState.nodes[parentNodeId].rightCurve.controlPoint2 = {
+      parentNode.rightCurve.controlPoint2 = {
         x: viewBoxX,
-        y: newState.nodes[parentNodeId].rightCurve.controlPoint2.y,
+        y: parentNode.rightCurve.controlPoint2.y,
       };
     }
   } else if (state.draggingObjectId.pointProp === 'controlPoint1')
     if (isLeft)
-      newState.nodes[parentNodeId].leftCurve.controlPoint1 = {
+      parentNode.leftCurve.controlPoint1 = {
         x: viewBoxX,
         y: viewBoxY,
       };
     else
-      newState.nodes[parentNodeId].rightCurve.controlPoint1 = {
+      parentNode.rightCurve.controlPoint1 = {
         x: viewBoxX,
         y: viewBoxY,
       };
   else if (state.draggingObjectId.pointProp === 'controlPoint2')
     if (isLeft)
-      newState.nodes[parentNodeId].leftCurve.controlPoint2 = {
+      parentNode.leftCurve.controlPoint2 = {
         x: viewBoxX,
         y: viewBoxY,
       };
     else
-      newState.nodes[parentNodeId].rightCurve.controlPoint2 = {
+      parentNode.rightCurve.controlPoint2 = {
         x: viewBoxX,
         y: viewBoxY,
       };
