@@ -39,10 +39,9 @@ const Node = (props) => {
         cy={node.position.y}
         rx={node.r}
         ry={node.r}
-        fill="white"
         stroke="rgb(244, 0, 137)"
         strokeWidth={2}
-        style={{ cursor: '-webkit-grab' }}
+        className="cursor-drag fill-current text-white"
       />
       <Text
         className="unselectable"
