@@ -1,5 +1,5 @@
-import { setDraggingObjectId } from '../../../redux/actions/setDraggingObjectId';
-import store from '../../../redux/store';
+import { setDraggingObjectId } from '@redux/actions/setDraggingObjectId';
+import store from '@redux/store';
 
 const handleMouseDown = (parentNodeId, isLeft, pointProp) => {
   const state = store.getState().panelState;

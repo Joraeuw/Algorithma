@@ -1,4 +1,4 @@
-import store from '../../redux/store';
+import store from '@redux/store';
 
 //Mouse Handlers
 import handleMouseUpOnNode from './MouseEvents/handleMouseUpOnNode';

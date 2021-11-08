@@ -1,6 +1,5 @@
-import { setDraggingObjectId } from '../../../redux/actions/setDraggingObjectId';
-import store from '../../../redux/store';
-import { setOverallState } from '../../../redux/actions/setOverallState';
+import store from '@redux/store';
+import { setOverallState } from '@redux/actions/setOverallState';
 
 const handleMouseUpOnNode = (node) => {
   const state = store.getState().panelState;

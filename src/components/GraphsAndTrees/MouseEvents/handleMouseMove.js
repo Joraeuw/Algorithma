@@ -1,6 +1,6 @@
-import { setOverallState } from '../../../redux/actions/setOverallState';
-import store from '../../../redux/store';
-import { getStartPoint, getEndAndControlPoint } from '../../../staticFunctions';
+import { setOverallState } from '@redux/actions/setOverallState';
+import store from '@redux/store';
+import { getStartPoint, getEndAndControlPoint } from '@/staticFunctions';
 import { offset, init2 } from '../node/initialNodeData';
 
 const handleMouseMove = async ({ clientX, clientY }) => {
