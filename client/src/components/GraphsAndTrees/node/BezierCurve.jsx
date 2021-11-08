@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowAngle } from '../../../staticFunctions';
+import { ArrowAngle } from '@/staticFunctions';
 
 const BezierCurve = (props) => {
   const { startPoint, controlPoint1, controlPoint2, endPoint } = props.curve;

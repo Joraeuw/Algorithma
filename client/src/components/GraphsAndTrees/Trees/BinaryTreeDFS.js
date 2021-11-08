@@ -1,4 +1,4 @@
-import store from '../../../redux/store';
+import store from '@redux/store';
 
 const nodes = store.getState().panelState.nodes;
 let record = '';

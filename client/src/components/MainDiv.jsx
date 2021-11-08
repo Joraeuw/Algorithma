@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import TablePage from '../pages/TablePage';
-import GraphsAndTrees from '../pages/GraphsAndTreesPage';
+import TablePage from '@pages/TablePage';
+import GraphsAndTrees from '@pages/GraphsAndTreesPage';
 const MainDiv = () => {
   return (
     <div className="mainDiv">

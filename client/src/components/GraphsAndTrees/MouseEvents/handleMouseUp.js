@@ -1,7 +1,7 @@
-import { setDraggingObjectId } from '../../../redux/actions/setDraggingObjectId';
-import store from '../../../redux/store';
-import { isWithingPerimeter } from '../../../staticFunctions';
-import { setOverallState } from '../../../redux/actions/setOverallState';
+import { setDraggingObjectId } from '@redux/actions/setDraggingObjectId';
+import store from '@redux/store';
+import { isWithingPerimeter } from '@/staticFunctions';
+import { setOverallState } from '@redux/actions/setOverallState';
 
 const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
   const state = store.getState().panelState;
