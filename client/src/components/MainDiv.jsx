@@ -10,7 +10,7 @@ const MainDiv = () => {
         <Route path="/graphs" component={GraphsAndTrees} />
         <Route path="/table" component={TablePage} />
       </Router>
-      <MediaControls />
+      <MediaControls maxValue={20} />
     </div>
   );
 };
