@@ -44,7 +44,6 @@ const handleMouseMove = async ({ clientX, clientY }) => {
         1
       );
 
-      //THIS NEEDS FIXING
       node.leftCurve.controlPoint1 = node.leftCurve.startPoint;
       node.leftCurve.controlPoint2 = node.leftCurve.startPoint;
     }
@@ -67,7 +66,7 @@ const handleMouseMove = async ({ clientX, clientY }) => {
       const z2_3 = 20 - 1;
       const parentNode = newState.nodes[node.parentNodeId];
 
-      if (parentNode.leftCurve.childId == nodeId) {
+      if (parentNode.leftCurve.childId === nodeId) {
         parentNode.leftCurve.endPoint = {
           x: node.parentConnectionArea.x,
           y: node.parentConnectionArea.y - z2_3,
@@ -77,7 +76,7 @@ const handleMouseMove = async ({ clientX, clientY }) => {
           x: parentNode.leftCurve.endPoint.x,
           y: parentNode.leftCurve.controlPoint2.y,
         };
-      } else if (parentNode.rightCurve.childId == nodeId) {
+      } else if (parentNode.rightCurve.childId === nodeId) {
         parentNode.rightCurve.endPoint = {
           x: node.parentConnectionArea.x,
           y: node.parentConnectionArea.y - z2_3,

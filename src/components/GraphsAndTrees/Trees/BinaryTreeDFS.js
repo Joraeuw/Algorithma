@@ -3,9 +3,8 @@ import store from '@redux/store';
 const nodes = store.getState().panelState.nodes;
 let record = '';
 let foundNode = null;
-const _root = nodes['node6'];
 
-let findNodeRecursion = (targetNodeValue, currentNode) => {
+let findNodeRecursionDFS = (targetNodeValue, currentNode) => {
   if (!currentNode) return;
 
   if (currentNode.value === targetNodeValue) {
@@ -16,20 +15,24 @@ let findNodeRecursion = (targetNodeValue, currentNode) => {
   }
   if (currentNode.leftCurve.childId && !foundNode) {
     record += currentNode.id + ' => ' + currentNode.leftCurve.childId + '\n';
-    findNodeRecursion(targetNodeValue, nodes[currentNode.leftCurve.childId]);
+    findNodeRecursionDFS(targetNodeValue, nodes[currentNode.leftCurve.childId]);
   }
   if (currentNode.rightCurve.childId && !foundNode) {
     record += currentNode.id + ' => ' + currentNode.rightCurve.childId + '\n';
-    findNodeRecursion(targetNodeValue, nodes[currentNode.rightCurve.childId]);
+    findNodeRecursionDFS(
+      targetNodeValue,
+      nodes[currentNode.rightCurve.childId]
+    );
   }
   record += currentNode.id + ' => ' + currentNode.parentNodeId + '\n';
 };
 
-let DFSByValue = (targetNodeValue, root = _root) => {
+let DFSByValue = (targetNodeValue, rootId = 'node6') => {
+  const root = nodes[rootId];
   //RECORD/ PATH SAME THING
   record = '';
   foundNode = null;
-  findNodeRecursion(targetNodeValue, root);
+  findNodeRecursionDFS(targetNodeValue, root);
 
   return record;
 };
