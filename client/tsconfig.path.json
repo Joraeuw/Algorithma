@@ -4,7 +4,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@redux/*": ["src/redux/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@settings/*": ["src/settings/*"]
     }
   }
 }

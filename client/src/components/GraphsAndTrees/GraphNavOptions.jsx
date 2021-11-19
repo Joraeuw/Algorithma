@@ -11,7 +11,10 @@ const onButtonClick = () => {
 const GraphNavOptions = () => {
   return (
     <div>
-      <button className="bg-pink-300 rounded-md" onClick={onButtonClick}>
+      <button
+        className="bg-pink-500 rounded-md text-white p-5"
+        onClick={onButtonClick}
+      >
         Calculate
       </button>
     </div>
