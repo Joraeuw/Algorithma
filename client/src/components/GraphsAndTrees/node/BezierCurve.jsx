@@ -37,8 +37,8 @@ const BezierCurve = (props) => {
 
       <SmallHandle
         coordinates={controlPoint1}
-        onMouseDown={() =>
-          handleMouseDown(parentNodeId, isLeft, 'controlPoint1')
+        onMouseDown={(e) =>
+          handleMouseDown(e, parentNodeId, isLeft, 'controlPoint1')
         }
         onMouseUp={() => handleMouseUp()}
         isSelected={isSelected}
@@ -46,8 +46,8 @@ const BezierCurve = (props) => {
 
       <SmallHandle
         coordinates={controlPoint2}
-        onMouseDown={() =>
-          handleMouseDown(parentNodeId, isLeft, 'controlPoint2')
+        onMouseDown={(e) =>
+          handleMouseDown(e, parentNodeId, isLeft, 'controlPoint2')
         }
         onMouseUp={() => handleMouseUp()}
         isSelected={false}
@@ -56,7 +56,9 @@ const BezierCurve = (props) => {
       <HeadHandle
         coordinates={endPoint}
         crl2={controlPoint2}
-        onMouseDown={() => handleMouseDown(parentNodeId, isLeft, 'endPoint')}
+        onMouseDown={(e) =>
+          handleMouseDown(e, parentNodeId, isLeft, 'endPoint')
+        }
         onMouseUp={() => handleMouseUp(parentNodeId, isLeft, endPoint)}
       />
     </svg>

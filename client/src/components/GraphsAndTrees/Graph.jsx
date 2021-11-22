@@ -1,4 +1,5 @@
-import Panel from './panel';
+import Panel from './Panel';
+
 const Graph = ({ typeOfGraph = 'binaryTree' }) => {
   const [graphType, setGraphType] = useState(typeOfGraph);
 
