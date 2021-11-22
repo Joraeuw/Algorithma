@@ -1,9 +1,8 @@
 import BezierCurve from './BezierCurve';
 import Text from 'react-svg-text';
 import './node.module.css';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import { useState } from 'react';
 const Node = (props) => {
   const id = props.nodeId;
   const node = useSelector((state) => state.panelState).nodes[id];
@@ -33,7 +32,7 @@ const Node = (props) => {
         curve={node.rightCurve}
       />
       <ellipse
-        onMouseDown={handleMouseDownOnNode}
+        onMouseDown={(e) => handleMouseDownOnNode(e, id)}
         onMouseUp={() => handleMouseUpOnNode(node)}
         cx={node.position.x}
         cy={node.position.y}

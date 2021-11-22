@@ -7,8 +7,8 @@ import handleMouseLeave from './MouseEvents/handleMouseLeave';
 import handleMouseUp from './MouseEvents/handleMouseUp';
 import handleMouseDownOnNode from './MouseEvents/handleMouseDownOnNode';
 import handleMouseMove from './MouseEvents/handleMouseMove';
-
 import Node from './node/Node';
+
 const state = store.getState().panelState;
 
 const Panel = (props) => {
@@ -26,16 +26,16 @@ const Panel = (props) => {
     </svg>
   );
 };
-
 const nodes = Object.keys(state.nodes).map((nodeId) => (
   <Node
     key={nodeId}
-    handleMouseDownOnNode={() => handleMouseDownOnNode(nodeId)}
+    nodeId={nodeId}
+    handleMouseDownOnNode={(e) => {
+      handleMouseDownOnNode(e, nodeId);
+    }}
     handleMouseUpOnNode={handleMouseUpOnNode}
     handleMouseDown={handleMouseDown}
     handleMouseUp={handleMouseUp}
-    nodeId={nodeId}
   />
 ));
-
 export default Panel;
