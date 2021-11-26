@@ -5,7 +5,7 @@
 
 @layer utilities {
   .media-controls-container {
-    @apply sticky bg-gray-800 bottom-0 left-0;
+    @apply sticky bg-gray-800 bottom-0 left-0 z-50;
   }
 
   .media-controls {
@@ -14,6 +14,27 @@
 
   .io-media-buttons {
     @apply mx-1.5 inline-block text-pink-600 cursor-pointer;
+  }
+
+  .sidebar-container {
+    height: calc(100vh - theme('spacing.14'));
+    @apply fixed flex w-2/5 z-10 flex-row flex-grow-0
+    bg-gray-700 bg-opacity-60 right-0 top-0 text-white;
+  }
+
+  .closed-sidebar-container {
+    @apply transition-transform w-9;
+  }
+  .close-open-sidebar {
+    @apply flex justify-center align-middle 
+    bg-opacity-60 hover:bg-opacity-60 bg-gray-800 
+    transition-colors hover:bg-gray-900 hover:text-gray-300;
+  }
+  .is-closed {
+    @apply transform scale-0;
+  }
+  .is-open {
+    @apply transform scale-100;
   }
 }
 
