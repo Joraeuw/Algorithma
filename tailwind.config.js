@@ -8,7 +8,18 @@ module.exports = {
       pointer: 'pointer',
       drag: '-webkit-grab',
     },
+    minWidth: {
+      0: '0',
+      '100px': '100px',
+      '150px': '150px',
+      '200px': '200px',
+      '250px': '250px',
+      '300px': '300px',
+      '350px': '350px',
+      '400px': '400px',
+    },
   },
+
   variants: {
     extend: {},
   },

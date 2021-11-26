@@ -2,11 +2,11 @@ import { setOverallState } from '@redux/actions/setOverallState';
 import store from '@redux/store';
 import { getStartPoint, getEndAndControlPoint } from '@/staticFunctions';
 import { offset, init2 } from '../node/initialNodeData';
+import { viewBoxWidth, viewBoxHeight } from '@/settings/screen';
+
+const scale = store.getState().scale;
 
 const handleMouseMove = async ({ clientX, clientY }) => {
-  const viewBoxWidth = 1500;
-  const viewBoxHeight = 1500;
-
   //Might be improvable by taking draggingObjectId directly and afrter if creating the state
   const draggingObjectId = store.getState().panelState.draggingObjectId;
   if (!draggingObjectId) {
@@ -63,7 +63,7 @@ const handleMouseMove = async ({ clientX, clientY }) => {
 
     if (node.parentNodeId) {
       //2/3rds of triangle h
-      const z2_3 = 20 - 1;
+      const z2_3 = (20 - 1) * scale;
       const parentNode = newState.nodes[node.parentNodeId];
 
       if (parentNode.leftCurve.childId === nodeId) {

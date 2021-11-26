@@ -3,6 +3,7 @@ import Text from 'react-svg-text';
 import './node.module.css';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+
 const Node = (props) => {
   const id = props.nodeId;
   const node = useSelector((state) => state.panelState).nodes[id];

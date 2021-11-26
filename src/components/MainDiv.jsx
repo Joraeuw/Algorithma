@@ -5,7 +5,7 @@ import MediaControls from './OverlayControlManu/MediaControls';
 
 const MainDiv = () => {
   return (
-    <div className="mainDiv">
+    <div  className="mainDiv">
       <Router>
         <Route path="/graphs" component={GraphsAndTrees} />
         <Route path="/table" component={TablePage} />
