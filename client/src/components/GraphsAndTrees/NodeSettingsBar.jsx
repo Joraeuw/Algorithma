@@ -1,7 +1,7 @@
 import { setDraggingObjectId } from '@/redux/actions/setDraggingObjectId';
 import store from '@redux/store';
 import { useState } from 'react';
-import { IoChevronForwardOutline } from 'react-icons/io5';
+import { IoChevronForwardOutline, IoChevronBackOutline } from 'react-icons/io5';
 
 const NodeSideBar = ({ isOpen, setOpen, nodeId }) => {
   //const state = store.getState().panelState.nodes[nodeId];
@@ -10,11 +10,15 @@ const NodeSideBar = ({ isOpen, setOpen, nodeId }) => {
   return (
     <div
       className={`${
-        isOpen ? null : 'closed-sidebar-container'
-      } sidebar-container`}
+        isOpen ? '' : 'closed-sidebar-container '
+      }sidebar-container`}
     >
       <div onClick={handleCloseSidebar} className="close-open-sidebar">
-        <IoChevronForwardOutline className="self-center w-9 h-9" />
+        {isOpen ? (
+          <IoChevronForwardOutline className="self-center w-9 h-9" />
+        ) : (
+          <IoChevronBackOutline className="self-center w-9 h-9" />
+        )}
       </div>
       <div
         className={`${

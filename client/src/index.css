@@ -18,17 +18,17 @@
 
   .sidebar-container {
     height: calc(100vh - theme('spacing.14'));
-    @apply fixed flex w-2/5 z-10 flex-row flex-grow-0
+    @apply transition-all duration-500 fixed flex w-1/5 min-w-250px z-10 flex-row flex-grow-0
     bg-gray-700 bg-opacity-60 right-0 top-0 text-white;
   }
 
   .closed-sidebar-container {
-    @apply transition-transform w-9;
+    @apply transition-all duration-500 w-9 min-w-0;
   }
   .close-open-sidebar {
     @apply flex justify-center align-middle 
     bg-opacity-60 hover:bg-opacity-60 bg-gray-800 
-    transition-colors hover:bg-gray-900 hover:text-gray-300;
+    transition-colors  hover:bg-gray-900 hover:text-gray-300;
   }
   .is-closed {
     @apply transform scale-0;
