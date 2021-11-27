@@ -3,6 +3,7 @@ import Text from 'react-svg-text';
 import './node.module.css';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import handleMouseLeave from '../MouseEvents/handleMouseLeave';
 
 const Node = (props) => {
   const id = props.nodeId;
@@ -34,7 +35,7 @@ const Node = (props) => {
       />
       <ellipse
         onMouseDown={(e) => handleMouseDownOnNode(e, id)}
-        onMouseUp={() => handleMouseUpOnNode(node)}
+        onMouseUp={(e) => handleMouseUpOnNode(node)}
         cx={node.position.x}
         cy={node.position.y}
         rx={node.r}
@@ -43,11 +44,13 @@ const Node = (props) => {
         strokeWidth={2}
         className="cursor-drag fill-current text-white"
       />
+
       <Text
-        className="unselectable"
+        className="unselectable pointer-events-none"
         x={node.position.x}
         y={node.position.y}
-        verticalAnchor="start"
+        verticalAnchor="middle"
+        textAnchor="middle"
       >
         {node.value}
       </Text>
