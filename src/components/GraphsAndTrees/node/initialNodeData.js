@@ -11,6 +11,9 @@ const init2 = { id: 1, r: 50 * scale, position: { x: 300, y: 300 } };
 const startInitR2 = getStartPoint(init2.position, init2.r, -45);
 const startInitL2 = getStartPoint(init2.position, init2.r, 225);
 const stateInit = {
+  lastNodeId: 'node0',
+  rootNodeId: 'node0',
+  targetNodeId: 'node1',
   nodes: [
     {
       id: 'node0',

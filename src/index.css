@@ -18,10 +18,9 @@
 
   .sidebar-container {
     height: calc(100vh - theme('spacing.14'));
-    @apply transition-all duration-500 fixed flex w-1/5 min-w-250px z-10 flex-row flex-grow-0
+    @apply transition-all duration-500 fixed flex w-1/4 min-w-250px z-10 flex-row 
     bg-gray-700 bg-opacity-60 right-0 top-0 text-white;
   }
-
   .closed-sidebar-container {
     @apply transition-all duration-500 w-9 min-w-0;
   }
@@ -35,6 +34,10 @@
   }
   .is-open {
     @apply transform scale-100;
+  }
+
+  .node-settings-button {
+    @apply text-black bg-pink-600 rounded mt-5 mb-2 w-2/3;
   }
 }
 
