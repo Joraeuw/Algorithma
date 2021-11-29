@@ -8,6 +8,11 @@ import handleMouseLeave from '../MouseEvents/handleMouseLeave';
 const Node = (props) => {
   const id = props.nodeId;
   const node = useSelector((state) => state.panelState).nodes[id];
+  const nodeColor = node.isTarget
+    ? 'green'
+    : node.isRoot
+    ? 'blue'
+    : 'rgb(244, 0, 137)';
 
   const {
     handleMouseDown,
@@ -40,8 +45,8 @@ const Node = (props) => {
         cy={node.position.y}
         rx={node.r}
         ry={node.r}
-        stroke="rgb(244, 0, 137)"
-        strokeWidth={2}
+        stroke={nodeColor}
+        strokeWidth={4}
         className="cursor-drag fill-current text-white"
       />
 
