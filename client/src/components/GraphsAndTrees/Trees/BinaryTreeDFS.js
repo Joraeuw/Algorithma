@@ -1,6 +1,7 @@
 import store from '@redux/store';
 
-const nodes = store.getState().panelState.nodes;
+const state = store.getState().panelState;
+const nodes = state.nodes;
 let record = '';
 let foundNode = null;
 
@@ -27,12 +28,14 @@ let findNodeRecursionDFS = (targetNodeValue, currentNode) => {
   record += currentNode.id + ' => ' + currentNode.parentNodeId + '\n';
 };
 
-let DFSByValue = (targetNodeValue, rootId = 'node6') => {
+let DFSByValue = (rootId, tragetId) => {
   const root = nodes[rootId];
+  const target = nodes[tragetId];
   //RECORD/ PATH SAME THING
   record = '';
   foundNode = null;
-  findNodeRecursionDFS(targetNodeValue, root);
+
+  findNodeRecursionDFS(target.value, root);
 
   return record;
 };
