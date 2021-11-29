@@ -5,14 +5,14 @@ import { useState } from 'react';
 import store from '@/redux/store';
 
 function GraphsAndTrees({ typeOfGraph = 'binary' }) {
-
+  const [path, setPath] = useState('');
   const [graphType, setGraphType] = useState(typeOfGraph);
   const [isOpen, setOpen] = useState(true);
   return (
     <div className="GraphsAndTrees">
-      <GraphNavOptions />
+      <GraphNavOptions setPath={setPath} />
       <Panel />
-      <NodeSideBar isOpen={isOpen} setOpen={setOpen} />
+      <NodeSideBar isOpen={isOpen} setOpen={setOpen} path={path} />
     </div>
   );
 }

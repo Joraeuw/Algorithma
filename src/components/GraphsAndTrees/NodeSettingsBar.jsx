@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { IoChevronForwardOutline, IoChevronBackOutline } from 'react-icons/io5';
 import { setTargetNodeId } from '@/redux/actions/setTargetNodeId';
 import { setRootNodeId } from '@/redux/actions/setRootNode';
+import { setNodeValue as NodeValueSetter } from '@/redux/actions/setNodeValue';
 
-const NodeSideBar = ({ isOpen, setOpen }) => {
+const NodeSideBar = ({ isOpen, setOpen, path }) => {
   const nodeId = useSelector((state) => state.panelState.lastNodeId);
   const dispatch = useDispatch();
 
@@ -13,18 +14,22 @@ const NodeSideBar = ({ isOpen, setOpen }) => {
 
   const [nodeValue, setNodeValue] = useState(node.value);
 
+  const handleSettingNodeValue = (e) => setNodeValue(e.target.value);
   const handleCloseSidebar = () => setOpen(!isOpen);
   const handleSetRoot = () => {
     dispatch(setRootNodeId(nodeId));
+    setNodeValue(node.value);
   };
   const handleSetTarget = () => {
     dispatch(setTargetNodeId(nodeId));
+    setNodeValue(node.value);
   };
 
   const rewriteNode = (e) => {
     e.preventDefault();
-
-    console.log(e);
+    const data = { newValue: e.target[0].value, nodeId: nodeId };
+    console.log(data);
+    dispatch(NodeValueSetter(data));
   };
 
   return (
@@ -53,7 +58,12 @@ const NodeSideBar = ({ isOpen, setOpen }) => {
           >
             <label className="block">
               <span className="mr-2">Value:</span>
-              <input className="text-black" type="text" value={node.value} />
+              <input
+                className="text-black"
+                type="text"
+                onChange={handleSettingNodeValue}
+                value={nodeValue}
+              />
             </label>
             <input
               className="node-settings-button"
@@ -73,6 +83,15 @@ const NodeSideBar = ({ isOpen, setOpen }) => {
               value="Submit"
             />
           </form>
+          <textarea
+            readOnly
+            className="text-black"
+            name="area"
+            id="area"
+            cols="30"
+            rows="10"
+            value={path}
+          />
         </div>
       </div>
     </div>

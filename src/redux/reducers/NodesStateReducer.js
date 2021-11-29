@@ -25,6 +25,9 @@ const NodesStateReducer = (
       state.nodes[state.targetNodeId].isTarget = false;
       state.nodes[action.payload.nodeId].isTarget = true;
       return { ...state, targetNodeId: action.payload.nodeId };
+    case 'SET_NODE_VALUE':
+      state.nodes[action.payload.nodeId].value = action.payload.newValue;
+      return { ...state };
     default:
       return state;
   }

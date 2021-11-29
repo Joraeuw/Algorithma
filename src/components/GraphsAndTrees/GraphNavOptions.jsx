@@ -1,19 +1,20 @@
-import Node from './node/Node';
 import DFSByValue from './Trees/BinaryTreeDFS';
+import { useSelector } from 'react-redux';
 
-const onButtonClick = () => {
-  //SHOULD MAKE A SELECTOR FOR THIS
-  const value = 'node0';
-  const path = DFSByValue(value);
-  console.log(path);
+const handleClick = (setPath, rootNodeId, targetNodeId) => {
+  const path = DFSByValue(rootNodeId, targetNodeId);
+  setPath(path);
 };
 
-const GraphNavOptions = () => {
+const GraphNavOptions = ({ setPath }) => {
+  const rootNodeId = useSelector((state) => state.panelState.rootNodeId);
+  const targetNodeId = useSelector((state) => state.panelState.targetNodeId);
+
   return (
     <div>
       <button
         className="bg-pink-500 rounded-md text-white p-5"
-        onClick={onButtonClick}
+        onClick={() => handleClick(setPath, rootNodeId, targetNodeId)}
       >
         Calculate
       </button>
