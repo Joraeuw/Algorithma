@@ -8,29 +8,37 @@ const NodesStateReducer = (
 ) => {
   switch (action.type) {
     case 'SET_DRAGGING_OBJECT_ID':
-      return { ...state, draggingObjectId: action.payload.draggingObjectId };
+      state.draggingObjectId = action.payload.draggingObjectId;
+      break;
     case 'SET_PARENT_CONNECTION_AREA':
-      return parentConnectionArea(state, action.payload);
+      state = parentConnectionArea(state, action.payload);
+      break;
     case 'SET_OVERALL_STATE':
-      return action.payload.state;
+      state = action.payload.state;
+      break;
     case 'ADD_NEW_NODE':
-      return addNewNode(state, action.payload);
+      state = addNewNode(state, action.payload);
+      break;
     case 'SET_LAST_NODE_ID':
-      return { ...state, lastNodeId: action.payload.nodeId };
+      state.lastNodeId = action.payload.nodeId;
+      break;
     case 'SET_ROOT_NODE_ID':
       state.nodes[state.rootNodeId].isRoot = false;
       state.nodes[action.payload.nodeId].isRoot = true;
-      return { ...state, rootNodeId: action.payload.nodeId };
+      state.rootNodeId = action.payload.nodeId;
+      break;
     case 'SET_TARGET_NODE_ID':
       state.nodes[state.targetNodeId].isTarget = false;
       state.nodes[action.payload.nodeId].isTarget = true;
-      return { ...state, targetNodeId: action.payload.nodeId };
+      state.targetNodeId = action.payload.nodeId;
+      break;
     case 'SET_NODE_VALUE':
       state.nodes[action.payload.nodeId].value = action.payload.newValue;
-      return { ...state };
+      break;
     default:
-      return state;
+      break;
   }
+  return state;
 };
 export default NodesStateReducer;
 
