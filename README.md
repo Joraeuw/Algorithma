@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# Algorithma
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Web application was created with the purpose of supporting informatics education and the learning of algorithms by visualizing a wide range of algorithms in an incredibly beautiful and clear manner. Build with React, Redux, JavaScript, TailWindCSS, WebPack, PostCSS.
 
-## Available Scripts
+## THIS PROJECT IS STILL EARLY IN DEVELOPMENT
+This project is currently very early in development. No feature is fully functional yet!
 
-In the project directory, you can run:
+## Setup instructions
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 
-### `yarn start`
+### Installation: 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`npm install`  
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### To run in development:
 
-### `yarn test`
+`npm run dev`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### To visit semi-developed part of the project, go to:
 
-### `yarn build`
+`http://localhost:3000/graphs/`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Reflection
+This is looking to be a yearlong project started on October 2021. The main goal of this project is to make algorithms of all sorts well understood from people of varying ages and development areas. This project has been, and still is an incredible introduction to web development for me.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Originally the idea was to build an application like Khan Academy that helps youths learn programming, but then I broadened my project to allow the learning of algorithms that will be of help to individuals from complete beginners to well-established software developers.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Future versions will include:
+- [ ] A well-established frontend with fully functional algorithms and visualization.
+- [ ] A backend server to handle users and save progress. Will likely include:
+  - Redis
+  - NodeJS
+  - Express.js
+  - MySQL or MongoDB
