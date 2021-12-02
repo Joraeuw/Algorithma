@@ -4,6 +4,7 @@ import store from '@redux/store';
 
 const handleMouseDownOnNode = (e, nodeId) => {
   //prevent movement form just right click
+  //If posible add context menu on each node
   if (e.nativeEvent.which === 3) {
     console.log(e);
     e.preventDefault();
