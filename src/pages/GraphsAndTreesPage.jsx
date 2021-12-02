@@ -11,7 +11,7 @@ function GraphsAndTrees({ typeOfGraph = 'binary' }) {
   return (
     <div className="GraphsAndTrees">
       <GraphNavOptions setPath={setPath} />
-      <Panel />
+      <Panel graphType={graphType} />
       <NodeSideBar isOpen={isOpen} setOpen={setOpen} path={path} />
     </div>
   );
