@@ -3,6 +3,7 @@ import store from '@redux/store';
 import { getStartPoint, getEndAndControlPoint } from '@/staticFunctions';
 import { offset, init2 } from '../node/initialNodeData';
 import { viewBoxWidth, viewBoxHeight } from '@/settings/screen';
+import { calculateParentConnectionArea } from './MouseEventsStaticFunctions';
 
 const scale = store.getState().scale;
 
@@ -59,7 +60,7 @@ const handleMouseMove = async ({ clientX, clientY }) => {
       node.rightCurve.controlPoint2 = node.rightCurve.startPoint;
     }
 
-    setParentConnectionArea(newState, nodeId);
+    calculateParentConnectionArea(newState, nodeId);
 
     if (node.parentNodeId) {
       //2/3rds of triangle h
@@ -153,18 +154,9 @@ const handleMouseMove = async ({ clientX, clientY }) => {
         y: viewBoxY,
       };
 
-  setParentConnectionArea(newState, parentNodeId);
+  calculateParentConnectionArea(newState, parentNodeId);
 
   store.dispatch(setOverallState(newState));
-};
-
-const setParentConnectionArea = (newState, parentNodeId) => {
-  newState.nodes[parentNodeId].parentConnectionArea.x =
-    newState.nodes[parentNodeId].position.x;
-  newState.nodes[parentNodeId].parentConnectionArea.y =
-    newState.nodes[parentNodeId].position.y - init2.r + offset;
-
-  return newState;
 };
 
 export default handleMouseMove;

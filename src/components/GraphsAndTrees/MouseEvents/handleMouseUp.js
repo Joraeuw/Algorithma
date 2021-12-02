@@ -2,6 +2,10 @@ import { setDraggingObjectId } from '@redux/actions/setDraggingObjectId';
 import store from '@redux/store';
 import { isWithingPerimeter } from '@/staticFunctions';
 import { setOverallState } from '@redux/actions/setOverallState';
+import {
+  resetCurvePosition,
+  calculateCtrlPositions,
+} from './MouseEventsStaticFunctions';
 
 const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
   const state = store.getState().panelState;
@@ -11,6 +15,7 @@ const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
 
   //If node Id is not provided we setState and return
   if (nodeId === -1) {
+    //return;
     store.dispatch(setDraggingObjectId(newState.draggingObjectId));
     return;
   }
@@ -26,9 +31,10 @@ const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
 
   if (isWithinPerimeter) {
     //2/3rds of triangle h
-    const z2_3 = 20 - 1;
+    // -1 to set a better position
+    const h2_3 = 20 - 1;
 
-    //Remove old connection from curve WORKING
+    //Remove old connection from curve
     if (curve.isConnected) {
       newState.nodes[curve.childId].parentNodeId = null;
     }
@@ -53,7 +59,7 @@ const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
       newState.nodes[oldParent.id] = oldParent;
     }
     curve.endPoint.x = targetNode.parentConnectionArea.x;
-    curve.endPoint.y = targetNode.parentConnectionArea.y - z2_3;
+    curve.endPoint.y = targetNode.parentConnectionArea.y - h2_3;
     curve.isConnected = true;
     curve.childId = targetNode.id;
     targetNode.parentNodeId = curve.baseId;
@@ -69,29 +75,6 @@ const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
   store.dispatch(setOverallState(newState));
   //store.dispatch(SetDraggingObjectId(newState.draggingObjectId));
   //store.dispatch(NodesStateReducer({ isLeft, node, curve }));
-};
-
-//reset curve position
-const resetCurvePosition = (curve, isLeft) => {
-  //reset ctrl1 and ctrl2 position
-  curve.controlPoint1 = { ...curve.startPoint };
-  curve.controlPoint2 = { ...curve.startPoint };
-  //determines the position of the endPoint relative to ctrl2
-  curve.endPoint.x = isLeft
-    ? curve.controlPoint2.x - 1
-    : curve.controlPoint2.x + 1;
-  curve.endPoint.y = curve.controlPoint2.y + 1;
-};
-
-//Determines how the ctrl points should be positioned
-const calculateCtrlPositions = (curve, isLeft) => {
-  if (isLeft) {
-    curve.controlPoint1 = { x: curve.controlPoint1.x, y: curve.endPoint.y };
-    curve.controlPoint2 = { x: curve.endPoint.x, y: curve.controlPoint2.y };
-  } else {
-    curve.controlPoint1 = { x: curve.controlPoint1.x, y: curve.endPoint.y };
-    curve.controlPoint2 = { x: curve.endPoint.x, y: curve.controlPoint2.y };
-  }
 };
 
 export default handleMouseUp;

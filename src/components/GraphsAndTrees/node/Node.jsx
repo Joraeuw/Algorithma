@@ -3,7 +3,6 @@ import Text from 'react-svg-text';
 import './node.module.css';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import handleMouseLeave from '../MouseEvents/handleMouseLeave';
 
 const Node = (props) => {
   const id = props.nodeId;
