@@ -2,6 +2,7 @@ import { Route, useRouteMatch } from 'react-router-dom';
 import { scaleSVG } from '@/redux/actions/scaleSVG';
 import BinaryTreePanel from './panels/BinaryTreePanel';
 
+
 //const scale = store.getState().scale;
 
 // const handleZoom = (event) => {

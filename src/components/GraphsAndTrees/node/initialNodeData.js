@@ -10,10 +10,10 @@ const startInitL = getStartPoint(init.position, init.r, 225);
 const init2 = { id: 1, r: 50 * scale, position: { x: 300, y: 300 } };
 const startInitR2 = getStartPoint(init2.position, init2.r, -45);
 const startInitL2 = getStartPoint(init2.position, init2.r, 225);
-const stateInit = {
+let stateInit = {
   lastNodeId: 'node0',
   rootNodeId: 'node0',
-  targetNodeId: 'node1',
+  targetNodeId: 'node0',
   nodes: [
     {
       id: 'node0',
@@ -358,6 +358,49 @@ const stateInit = {
         r: initR,
         x: init2.position.x,
         y: init2.position.y - init2.r + offset,
+      },
+    },
+  ],
+  draggingObjectId: null,
+};
+stateInit = {
+  lastNodeId: 'node0',
+  rootNodeId: 'node0',
+  targetNodeId: 'node0',
+  nodes: [
+    {
+      id: 'node0',
+      parentNodeId: null,
+      r: init.r,
+      position: init.position,
+      value: 'node0',
+      rightCurve: {
+        childId: null,
+        baseId: 'node0',
+        isConnected: false,
+        //perfect
+        startPoint: startInitR,
+        //shit
+        controlPoint1: startInitR,
+        //shit
+        controlPoint2: startInitR,
+        //shit
+        endPoint: { x: startInitR.x + 1, y: startInitR.y + 1 },
+      },
+      leftCurve: {
+        childId: null,
+        baseId: 'node0',
+        isConnected: false,
+        startPoint: startInitL,
+        controlPoint1: startInitL,
+        controlPoint2: startInitL,
+        endPoint: { x: startInitL.x - 1, y: startInitL.y + 1 },
+      },
+
+      parentConnectionArea: {
+        r: initR,
+        x: init.position.x,
+        y: init.position.y - init.r + offset,
       },
     },
   ],
