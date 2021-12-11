@@ -6,39 +6,40 @@ const NodesStateReducer = (
   state = { ...stateInit, nodes: nodesIdMap(stateInit.nodes) },
   action
 ) => {
+  let newState = { ...state };
   switch (action.type) {
     case 'SET_DRAGGING_OBJECT_ID':
-      state.draggingObjectId = action.payload.draggingObjectId;
+      newState.draggingObjectId = action.payload.draggingObjectId;
       break;
     case 'SET_PARENT_CONNECTION_AREA':
-      state = parentConnectionArea(state, action.payload);
+      newState = parentConnectionArea(newState, action.payload);
       break;
     case 'SET_OVERALL_STATE':
-      state = action.payload.state;
+      newState = action.payload.state;
       break;
     case 'ADD_NEW_NODE':
-      state = addNewNode(state, action.payload);
+      newState = addNewNode(newState, action.payload);
       break;
     case 'SET_LAST_NODE_ID':
-      state.lastNodeId = action.payload.nodeId;
+      newState.lastNodeId = action.payload.nodeId;
       break;
     case 'SET_ROOT_NODE_ID':
-      state.nodes[state.rootNodeId].isRoot = false;
-      state.nodes[action.payload.nodeId].isRoot = true;
-      state.rootNodeId = action.payload.nodeId;
+      newState.nodes[newState.rootNodeId].isRoot = false;
+      newState.nodes[action.payload.nodeId].isRoot = true;
+      newState.rootNodeId = action.payload.nodeId;
       break;
     case 'SET_TARGET_NODE_ID':
-      state.nodes[state.targetNodeId].isTarget = false;
-      state.nodes[action.payload.nodeId].isTarget = true;
-      state.targetNodeId = action.payload.nodeId;
+      newState.nodes[newState.targetNodeId].isTarget = false;
+      newState.nodes[action.payload.nodeId].isTarget = true;
+      newState.targetNodeId = action.payload.nodeId;
       break;
     case 'SET_NODE_VALUE':
-      state.nodes[action.payload.nodeId].value = action.payload.newValue;
+      newState.nodes[action.payload.nodeId].value = action.payload.newValue;
       break;
     default:
       break;
   }
-  return state;
+  return newState;
 };
 export default NodesStateReducer;
 
@@ -52,5 +53,10 @@ const parentConnectionArea = (state, { isLeft, node, curve }) => {
 };
 
 const addNewNode = (state, { newNode }) => {
-  return (state[newNode.id] = newNode);
+  const newState = { ...state };
+
+  newState.nodes[newNode.id] = {
+    ...newNode,
+  };
+  return newState;
 };

@@ -28,7 +28,6 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
   const rewriteNode = (e) => {
     e.preventDefault();
     const data = { newValue: e.target[0].value, nodeId: nodeId };
-    console.log(data);
     dispatch(NodeValueSetter(data));
   };
 
