@@ -1,5 +1,5 @@
 import BezierCurve from './BezierCurve';
-import Text from 'react-svg-text';
+import Text from '@globals/Text';
 import './node.module.css';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -22,7 +22,7 @@ const Node = (props) => {
   const [value, setValue] = useState('null');
 
   return (
-    <svg>
+    <g id={node.id}>
       <BezierCurve
         handleMouseDown={handleMouseDown}
         handleMouseUp={handleMouseUp}
@@ -48,7 +48,6 @@ const Node = (props) => {
         strokeWidth={4}
         className="cursor-drag fill-current text-white"
       />
-
       <Text
         className="unselectable pointer-events-none"
         x={node.position.x}
@@ -58,7 +57,7 @@ const Node = (props) => {
       >
         {node.value}
       </Text>
-    </svg>
+    </g>
   );
 };
 

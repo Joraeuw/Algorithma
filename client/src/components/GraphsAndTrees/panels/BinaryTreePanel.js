@@ -58,7 +58,6 @@ import { useSelector } from 'react-redux';
 
 const BinaryTreePanel = () => {
   let nodesData = useSelector((state) => state.panelState).nodes;
-  console.log(Object.keys(nodesData).length);
   const nodes = Object.values(nodesData).map((nodeData) => (
     <Node
       key={nodeData.id}
