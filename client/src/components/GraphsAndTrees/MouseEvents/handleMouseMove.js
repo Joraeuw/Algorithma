@@ -1,29 +1,29 @@
 import { setOverallState } from '@redux/actions/setOverallState';
 import store from '@redux/store';
 import { getStartPoint, getEndAndControlPoint } from '@/staticFunctions';
+import { viewBoxWidth, viewBoxHeight } from '@/settings/screen';
 import { calculateParentConnectionArea } from './MouseEventsStaticFunctions';
-import { viewBoxWidth } from '@/settings/screen';
+
+const scale = store.getState().scale;
 
 const handleMouseMove = async ({ clientX, clientY }) => {
   //Might be improvable by taking draggingObjectId directly and afrter if creating the state
-  const draggingObjectId = store.getState().panelState.draggingObjectId;
-  if (!draggingObjectId) {
+  const isDragging = store.getState().panelState.isDragging;
+  console.log(isDragging);
+  if (!isDragging) {
     return;
   }
   const state = store.getState().panelState;
-  const scale = store.getState().scale;
-  const viewBox = store.getState().viewBox;
-  // console.log(viewBox);
-
+  const draggingObjectId = state.draggingObjectId;
   //Control svg size relative to parent size
   const svgRect = document.querySelector('#svgRoot').getBoundingClientRect();
 
-  const svgX = clientX - svgRect.x;
-  const svgY = clientY - svgRect.y;
+  const svgX = clientX - svgRect.left;
+  const svgY = clientY - svgRect.top;
 
   //Mouse position
-  const viewBoxX = (svgX * viewBox.width) / svgRect.width;
-  const viewBoxY = (svgY * viewBox.height) / svgRect.height;
+  const viewBoxX = (svgX * viewBoxWidth) / svgRect.width;
+  const viewBoxY = (svgY * viewBoxHeight) / svgRect.height;
 
   let newState = { ...state };
   //Node controls

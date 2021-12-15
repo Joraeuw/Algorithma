@@ -11,6 +11,9 @@ const NodesStateReducer = (
     case 'SET_DRAGGING_OBJECT_ID':
       newState.draggingObjectId = action.payload.draggingObjectId;
       break;
+    case 'DRAGGING_OCCURS':
+      newState.isDragging = action.payload.isDragging;
+      break;
     case 'SET_PARENT_CONNECTION_AREA':
       newState = parentConnectionArea(newState, action.payload);
       break;
