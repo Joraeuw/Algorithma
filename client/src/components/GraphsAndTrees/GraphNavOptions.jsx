@@ -71,7 +71,7 @@ const GraphNavOptions = ({ setPath }) => {
   const state = { ...useSelector((state) => state.panelState) };
 
   return (
-    <div>
+    <div className="h-20">
       <button
         className="bg-pink-500 rounded-md text-white p-5"
         onClick={() => handleClick(setPath, rootNodeId, targetNodeId)}

@@ -1,8 +1,7 @@
 import mouseEvents from '../MouseEvents/mouseEvents';
 import Node from '../node/Node';
-import { viewBoxWidth, viewBoxHeight } from '@/settings/screen';
-import store from '@redux/store';
 import { useSelector } from 'react-redux';
+import { Zoom } from '@/redux/actions/Zoom';
 // import { getStartPoint } from '@/staticFunctions';
 // import { R } from '@/settings/screen';
 // import { v4 as generateUID } from 'uuid';
@@ -56,8 +55,17 @@ import { useSelector } from 'react-redux';
 //   return nodeId;
 // };
 
+const handleScroll = (e) => {
+  const target = e.target.getAttribute('viewBox');
+
+  //store.dispath(Zoom());
+  console.log(target);
+};
+
 const BinaryTreePanel = () => {
-  let nodesData = useSelector((state) => state.panelState).nodes;
+  const nodesData = useSelector((state) => state.panelState).nodes;
+  const viewBox = useSelector((state) => state.viewBox);
+
   const nodes = Object.values(nodesData).map((nodeData) => (
     <Node
       key={nodeData.id}
@@ -70,13 +78,15 @@ const BinaryTreePanel = () => {
       handleMouseUp={mouseEvents.handleMouseUp}
     />
   ));
-
+  console.log(viewBox);
   return (
     <svg
       id="svgRoot"
-      viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+      className="self-stretch h-full"
+      viewBox={`${viewBox.x},${viewBox.y},${viewBox.width},${viewBox.height}`}
       onMouseMove={(event) => mouseEvents.handleMouseMove(event)}
       onMouseLeave={() => mouseEvents.handleMouseLeave()}
+      onScroll={handleScroll}
     >
       {nodes}
     </svg>
