@@ -35,7 +35,10 @@
   .is-open {
     @apply transform scale-100;
   }
-
+  .svg-container {
+    height: calc(100vh - theme('spacing.14') - theme('height.20'));
+    @apply overflow-scroll;
+  }
   .node-settings-button {
     @apply text-black bg-pink-600 rounded mt-5 mb-2 w-2/3;
   }
