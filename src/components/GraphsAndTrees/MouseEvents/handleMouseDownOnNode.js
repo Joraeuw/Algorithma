@@ -1,5 +1,6 @@
 import { setDraggingObjectId } from '@redux/actions/setDraggingObjectId';
 import { setLastNodeId } from '@/redux/actions/setLastNodeId';
+import { draggingOccurs } from '@/redux/actions/draggingOccurs';
 import store from '@redux/store';
 
 const handleMouseDownOnNode = (e, nodeId) => {
@@ -16,6 +17,7 @@ const handleMouseDownOnNode = (e, nodeId) => {
   let newState = { ...state };
   newState.draggingObjectId = { nodeId };
 
+  store.dispatch(draggingOccurs(true));
   store.dispatch(setLastNodeId(nodeId));
   store.dispatch(setDraggingObjectId(newState.draggingObjectId));
 };

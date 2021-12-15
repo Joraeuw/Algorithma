@@ -405,5 +405,6 @@ stateInit = {
     },
   ],
   draggingObjectId: null,
+  isDragging: false,
 };
 export { stateInit, init2, offset };

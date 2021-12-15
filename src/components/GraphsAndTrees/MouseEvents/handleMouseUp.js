@@ -1,4 +1,5 @@
 import { setDraggingObjectId } from '@redux/actions/setDraggingObjectId';
+import { draggingOccurs } from '@/redux/actions/draggingOccurs';
 import store from '@redux/store';
 import { isWithingPerimeter } from '@/staticFunctions';
 import { setOverallState } from '@redux/actions/setOverallState';
@@ -72,6 +73,9 @@ const handleMouseUp = (nodeId = -1, isLeft = false, currentLocation) => {
 
     resetCurvePosition(curve, isLeft);
   }
+
+  newState.isDragging = false;
+  //store.dispatch(draggingOccurs(false));
   store.dispatch(setOverallState(newState));
   //store.dispatch(SetDraggingObjectId(newState.draggingObjectId));
   //store.dispatch(NodesStateReducer({ isLeft, node, curve }));
