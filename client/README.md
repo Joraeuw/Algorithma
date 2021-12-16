@@ -20,7 +20,7 @@ Clone down this repository. You will need `node` and `npm` installed globally on
 
 ### To visit semi-developed part of the project, go to:
 
-`http://localhost:3000/graphs/binaryGraph`
+`http://localhost:3000/graphs/binaryTree`
 
 ## Reflection
 
