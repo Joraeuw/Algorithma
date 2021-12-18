@@ -64,10 +64,9 @@ const handleNewNode = (state) => {
 };
 
 const GraphNavOptions = ({ setPath }) => {
-  const rootNodeId = { ...useSelector((state) => state.panelState.rootNodeId) };
-  const targetNodeId = {
-    ...useSelector((state) => state.panelState.targetNodeId),
-  };
+  const rootNodeId = useSelector((state) => state.panelState.rootNodeId);
+  const targetNodeId = useSelector((state) => state.panelState.targetNodeId);
+
   const state = { ...useSelector((state) => state.panelState) };
 
   return (
