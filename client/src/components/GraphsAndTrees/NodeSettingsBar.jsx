@@ -5,6 +5,10 @@ import { IoChevronForwardOutline, IoChevronBackOutline } from 'react-icons/io5';
 import { setTargetNodeId } from '@/redux/actions/setTargetNodeId';
 import { setRootNodeId } from '@/redux/actions/setRootNode';
 import { setNodeValue as NodeValueSetter } from '@/redux/actions/setNodeValue';
+import { setOverallState } from '@/redux/actions/setOverallState';
+import Button from '@material-tailwind/react/Button';
+import Input from '@material-tailwind/react/Input';
+import Textarea from '@material-tailwind/react/Input';
 
 const NodeSideBar = ({ isOpen, setOpen, path }) => {
   const nodeId = useSelector((state) => state.panelState.lastNodeId);
@@ -26,11 +30,16 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
   };
 
   const rewriteNode = (e) => {
-    e.preventDefault();
+    console.log(e);
     const data = { newValue: e.target[0].value, nodeId: nodeId };
+    console.log(data);
     dispatch(NodeValueSetter(data));
   };
-
+  const handleRemoveNode = () => {
+    let state = { ...store.getState().panelState };
+    delete state.nodes[nodeId];
+    store.dispatch(setOverallState(state));
+  };
   return (
     <div
       className={`${
@@ -50,46 +59,84 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
         } flex flex-col align-middle w-full justify-self-center`}
       >
         <span className="flex my-8 text-4xl justify-center">{node.value}</span>
-        <div className="options-container">
-          <form
-            className="flex flex-col flex-wrap align-middle justify-middle mx-5 my-10"
-            onSubmit={rewriteNode}
+        <div className="options-container flex flex-col justify-center">
+          <Input
+            className="node-settings-button"
+            type="text"
+            color="lightBlue"
+            size="regular"
+            outline={true}
+            placeholder="Input"
+            onChange={handleSettingNodeValue}
+            value={nodeValue}
+          />
+
+          <Button
+            className="node-settings-button"
+            color="blueGray"
+            buttonType="filled"
+            size="regular"
+            rounded={false}
+            block={false}
+            iconOnly={false}
+            ripple="light"
+            onClick={handleSetRoot}
           >
-            <label className="block">
-              <span className="mr-2">Value:</span>
-              <input
-                className="text-black"
-                type="text"
-                onChange={handleSettingNodeValue}
-                value={nodeValue}
-              />
-            </label>
-            <input
-              className="node-settings-button"
-              type="button"
-              value="set root"
-              onClick={handleSetRoot}
-            />
-            <input
-              className="node-settings-button"
-              type="button"
-              value="set target"
-              onClick={handleSetTarget}
-            />
-            <input
-              className="node-settings-button"
-              type="submit"
-              value="Submit"
-            />
-          </form>
-          <textarea
+            set root
+          </Button>
+          <Button
+            className="node-settings-button"
+            color="blueGray"
+            buttonType="filled"
+            size="regular"
+            rounded={false}
+            block={false}
+            iconOnly={false}
+            ripple="light"
+            onClick={handleSetTarget}
+          >
+            set target
+          </Button>
+          <Button
+            className="node-settings-button"
+            color="blueGray"
+            buttonType="filled"
+            size="regular"
+            rounded={false}
+            block={false}
+            iconOnly={false}
+            ripple="light"
+            onClick={handleRemoveNode}
+          >
+            remove node
+          </Button>
+          <Button
+            className="node-settings-button"
+            color="blueGray"
+            buttonType="filled"
+            size="regular"
+            rounded={false}
+            block={false}
+            iconOnly={false}
+            ripple="light"
+            onClick={rewriteNode}
+          >
+            set node value
+          </Button>
+
+          <Textarea
             readOnly
+            color="lightBlue"
+            
+            size="regular"
+            outline={true}
             className="text-black"
             name="area"
             id="area"
             cols="30"
             rows="10"
             value={path}
+            placeholder="Path"
           />
         </div>
       </div>

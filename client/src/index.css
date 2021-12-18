@@ -40,7 +40,7 @@
     @apply overflow-scroll;
   }
   .node-settings-button {
-    @apply text-black bg-pink-600 rounded mt-5 mb-2 w-2/3;
+    @apply rounded mt-5 mb-2 w-5/6;
   }
 }
 

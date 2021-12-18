@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import { Zoom } from '@/redux/actions/Zoom';
 import store from '@/redux/store';
 
-//Handle drag by changeing is dragging if its true and has no dragging id it measn that svg is being dragged
+//Handle drag by changeing is dragging if its true and
+//has no dragging id it measn that svg is being dragged
 //Implement onMouseDownOnSvg, onMosueUpOnSvg and edit
 //onMosueMove to change viewBox x and y given mouse positions
 const handleDrag = (event) => {
@@ -38,7 +39,7 @@ const BinaryTreePanel = () => {
       handleMouseUp={mouseEvents.handleMouseUp}
     />
   ));
-  //console.log(viewBox);
+
   return (
     <svg
       id="svgRoot"
@@ -46,6 +47,7 @@ const BinaryTreePanel = () => {
       viewBox={`${viewBox.x},${viewBox.y},${viewBox.width},${viewBox.height}`}
       onMouseMove={(event) => mouseEvents.handleMouseMove(event)}
       onMouseLeave={() => mouseEvents.handleMouseLeave()}
+      // onMouseUp={}
     >
       {nodes}
     </svg>

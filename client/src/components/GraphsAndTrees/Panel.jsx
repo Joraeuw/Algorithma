@@ -26,28 +26,28 @@ const handleZoom = (event) => {
   //let newScale = scale + event.deltaY * -0.01;
 };
 
-const handleDrag = (event) => {
-  if (event.target.getAttribute('id') !== 'svgRoot') return;
-  let viewBoxDigits = event.target.getAttribute('viewBox');
-  viewBoxDigits = viewBoxDigits.split(',').map(Number);
-  //console.log(event);
+// const handleDrag = (event) => {
+//   if (event.target.getAttribute('id') !== 'svgRoot') return;
+//   let viewBoxDigits = event.target.getAttribute('viewBox');
+//   viewBoxDigits = viewBoxDigits.split(',').map(Number);
+//   //console.log(event);
 
-  viewBoxDigits[0] = -event.clientX;
-  viewBoxDigits[1] = -event.clientY;
+//   viewBoxDigits[0] = -event.clientX;
+//   viewBoxDigits[1] = -event.clientY;
 
-  const viewBox = {
-    x: viewBoxDigits[0],
-    y: viewBoxDigits[1],
-    width: viewBoxDigits[2],
-    height: viewBoxDigits[3],
-  };
-  store.dispatch(Zoom(viewBox));
-};
+//   const viewBox = {
+//     x: viewBoxDigits[0],
+//     y: viewBoxDigits[1],
+//     width: viewBoxDigits[2],
+//     height: viewBoxDigits[3],
+//   };
+//   store.dispatch(Zoom(viewBox));
+// };
 const Panel = (props) => {
   const { url } = useRouteMatch();
 
   return (
-    <div onWheel={handleZoom} onDrag={handleDrag} className="svg-container">
+    <div onWheel={handleZoom} className="svg-container">
       <Route path={`${url}/binaryTree`}>
         <BinaryTreePanel />
       </Route>
