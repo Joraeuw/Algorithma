@@ -2,10 +2,11 @@ import { setOverallState } from '@redux/actions/setOverallState';
 import store from '@redux/store';
 import { getStartPoint, getEndAndControlPoint } from '@/staticFunctions';
 import { calculateParentConnectionArea } from './MouseEventsStaticFunctions';
+import { Zoom } from '@/redux/actions/Zoom';
 
 const scale = store.getState().scale;
 
-const handleMouseMove = async ({ clientX, clientY }) => {
+const handleMouseMove = async ({ clientX, clientY, movementX, movementY }) => {
   //Might be improvable by taking draggingObjectId directly and afrter if creating the state
   const isDragging = store.getState().panelState.isDragging;
   if (!isDragging) {
@@ -21,12 +22,21 @@ const handleMouseMove = async ({ clientX, clientY }) => {
   const svgY = clientY - svgRect.top;
 
   //Mouse position
-  const viewBoxX = (svgX * viewBox.width) / svgRect.width;
-  const viewBoxY = (svgY * viewBox.height) / svgRect.height;
+  const viewBoxX = (svgX * viewBox.width) / svgRect.width + viewBox.x;
+  const viewBoxY = (svgY * viewBox.height) / svgRect.height + viewBox.y;
 
   let newState = { ...state };
-  //Node controls
+
+  if (isDragging && draggingObjectId === null) {
+    viewBox.x -= movementX;
+    viewBox.y -= movementY;
+
+    store.dispatch(Zoom(viewBox));
+    return;
+  }
+
   if (draggingObjectId.nodeId != null) {
+    //Node controls
     const nodeId = draggingObjectId.nodeId;
     const node = newState.nodes[nodeId];
 
@@ -154,8 +164,9 @@ const handleMouseMove = async ({ clientX, clientY }) => {
       };
 
   calculateParentConnectionArea(newState, parentNodeId);
-
   store.dispatch(setOverallState(newState));
 };
+
+const handleMouseMoveOnPanel = async ({ clientX, clientY }, xPos, yPos) => {};
 
 export default handleMouseMove;
