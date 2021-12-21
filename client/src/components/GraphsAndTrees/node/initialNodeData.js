@@ -1,5 +1,5 @@
-import { getStartPoint } from '@/staticFunctions';
 import { scale } from '@/settings/screen';
+import { getStartPoint } from '@/staticFunctions';
 
 const initR = 50;
 const offset = 0;

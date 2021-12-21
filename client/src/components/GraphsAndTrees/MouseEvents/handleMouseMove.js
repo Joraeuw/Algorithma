@@ -1,8 +1,8 @@
+import { Zoom } from '@/redux/actions/Zoom';
+import { getEndAndControlPoint, getStartPoint } from '@/staticFunctions';
 import { setOverallState } from '@redux/actions/setOverallState';
 import store from '@redux/store';
-import { getStartPoint, getEndAndControlPoint } from '@/staticFunctions';
 import { calculateParentConnectionArea } from './MouseEventsStaticFunctions';
-import { Zoom } from '@/redux/actions/Zoom';
 
 const scale = store.getState().scale;
 
