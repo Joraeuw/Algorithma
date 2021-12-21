@@ -1,14 +1,16 @@
-import store from '@redux/store';
-import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { IoChevronForwardOutline, IoChevronBackOutline } from 'react-icons/io5';
-import { setTargetNodeId } from '@/redux/actions/setTargetNodeId';
-import { setRootNodeId } from '@/redux/actions/setRootNode';
 import { setNodeValue as NodeValueSetter } from '@/redux/actions/setNodeValue';
 import { setOverallState } from '@/redux/actions/setOverallState';
+import { setRootNodeId } from '@/redux/actions/setRootNode';
+import { setTargetNodeId } from '@/redux/actions/setTargetNodeId';
 import Button from '@material-tailwind/react/Button';
-import Input from '@material-tailwind/react/Input';
-import Textarea from '@material-tailwind/react/Input';
+import {
+  default as Input,
+  default as Textarea,
+} from '@material-tailwind/react/Input';
+import store from '@redux/store';
+import { useState } from 'react';
+import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
+import { useDispatch, useSelector } from 'react-redux';
 
 const NodeSideBar = ({ isOpen, setOpen, path }) => {
   const nodeId = useSelector((state) => state.panelState.lastNodeId);
@@ -30,8 +32,8 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
   };
 
   const rewriteNode = (e) => {
-    console.log(e);
-    const data = { newValue: e.target[0].value, nodeId: nodeId };
+    const dataBox = document.getElementById('nodeInputValueBox');
+    const data = { newValue: dataBox.value, nodeId: nodeId };
     console.log(data);
     dispatch(NodeValueSetter(data));
   };
@@ -61,6 +63,7 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
         <span className="flex my-8 text-4xl justify-center">{node.value}</span>
         <div className="options-container flex flex-col justify-center">
           <Input
+            id="nodeInputValueBox"
             className="node-settings-button"
             type="text"
             color="lightBlue"
@@ -123,14 +126,12 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
           >
             set node value
           </Button>
-
           <Textarea
             readOnly
             color="lightBlue"
-            
-            size="regular"
+            size="xl"
             outline={true}
-            className="text-black"
+            className="text-white h-80"
             name="area"
             id="area"
             cols="30"

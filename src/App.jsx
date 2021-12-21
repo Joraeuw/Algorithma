@@ -1,5 +1,5 @@
-import RootDiv from './RootDiv.jsx';
 import '@material-tailwind/react/tailwind.css';
+import RootDiv from './RootDiv.jsx';
 
 function App() {
   return (

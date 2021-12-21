@@ -1,8 +1,8 @@
-import mouseEvents from '../MouseEvents/mouseEvents';
-import Node from '../node/Node';
 import { useSelector } from 'react-redux';
 import handleMouseDownOnPanel from '../MouseEvents/handleMouseDownOnPanel';
 import handleMouseUpOnPanel from '../MouseEvents/handleMouseUpOnPanel';
+import mouseEvents from '../MouseEvents/mouseEvents';
+import Node from '../node/Node';
 
 const BinaryTreePanel = () => {
   const nodesData = useSelector((state) => state.panelState).nodes;
