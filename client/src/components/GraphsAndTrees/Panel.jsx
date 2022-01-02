@@ -3,7 +3,6 @@ import store from '@/redux/store';
 import { Route, useRouteMatch } from 'react-router-dom';
 import BinaryTreePanel from './panels/BinaryTreePanel.jsx';
 
-//const scale = store.getState().scale;
 const scrollSpeed = 0.5;
 
 const handleZoom = (event) => {
@@ -23,7 +22,6 @@ const handleZoom = (event) => {
   if (viewBox.height <= 250 || viewBox.height >= 3000) return;
   //console.log(viewBox);
   store.dispatch(Zoom(viewBox));
-  //let newScale = scale + event.deltaY * -0.01;
 };
 
 // const handleDrag = (event) => {

@@ -1,13 +1,12 @@
-import { scale } from '@/settings/screen';
 import { getStartPoint } from '@/staticFunctions';
 
 const initR = 50;
 const offset = 0;
-const init = { id: 0, r: 50 * scale, position: { x: 100, y: 100 } };
+const init = { id: 0, r: 50, position: { x: 100, y: 100 } };
 const startInitR = getStartPoint(init.position, init.r, -45);
 const startInitL = getStartPoint(init.position, init.r, 225);
 
-const init2 = { id: 1, r: 50 * scale, position: { x: 300, y: 300 } };
+const init2 = { id: 1, r: 50, position: { x: 300, y: 300 } };
 const startInitR2 = getStartPoint(init2.position, init2.r, -45);
 const startInitL2 = getStartPoint(init2.position, init2.r, 225);
 let stateInit = {
