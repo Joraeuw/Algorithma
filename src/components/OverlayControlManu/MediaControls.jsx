@@ -1,50 +1,52 @@
-import { useState } from 'react';
-
+import { Pause } from '@/redux/actions/Pause';
+import { Play } from '@/redux/actions/Play';
+import { setFrame } from '@/redux/actions/setFrame';
+import { setSpeed } from '@/redux/actions/setSpeed';
+import store from '@/redux/store';
 import {
-  IoPlay,
-  IoPause,
-  IoPlayForward,
-  IoPlayBack,
-  IoPlaySkipForward,
-  IoPlaySkipBack,
-} from 'react-icons/io5';
-
-import {
+  Box,
   ChakraProvider,
   Slider,
-  SliderTrack,
   SliderFilledTrack,
   SliderThumb,
-  Box,
+  SliderTrack,
 } from '@chakra-ui/react';
+import {
+  IoPause,
+  IoPlay,
+  IoPlayBack,
+  IoPlayForward,
+  IoPlaySkipBack,
+  IoPlaySkipForward,
+} from 'react-icons/io5';
+import { useDispatch, useSelector } from 'react-redux';
 
-const MediaControls = ({ maxValue }) => {
-  const [value, setValue] = useState(0);
-  const [speed, setSpeed] = useState(5);
-  const [isPlaying, setIsPlaying] = useState(false);
+const MediaControls = () => {
+  const mediaControls = useSelector((state) => state.mediaControls);
 
   return (
     <ChakraProvider>
       <div className="media-controls-container">
         <div className="media-controls">
-          {SpeedSlider(setSpeed)}
-          {MediaButtons(isPlaying, setIsPlaying)}
-          {ValueSlider(setValue, maxValue)}
+          {SpeedSlider()}
+          {MediaButtons(mediaControls.isPlaying)}
+          {FrameSlider(mediaControls.maxFrames)}
         </div>
       </div>
     </ChakraProvider>
   );
 };
 
-const PlaySwitch = (isPlaying, setIsPlaying) => {
+const PlaySwitch = (isPlaying) => {
+  const dispatch = useDispatch();
   return isPlaying ? (
-    <IoPause className="io-media-buttons" onClick={() => setIsPlaying(false)} />
+    <IoPause className="io-media-buttons" onClick={() => dispatch(Pause())} />
   ) : (
-    <IoPlay className="io-media-buttons" onClick={() => setIsPlaying(true)} />
+    <IoPlay className="io-media-buttons" onClick={() => dispatch(Play())} />
   );
 };
 
-const SpeedSlider = (setSpeed) => {
+const SpeedSlider = () => {
   return (
     <Box
       display="flex"
@@ -59,7 +61,7 @@ const SpeedSlider = (setSpeed) => {
         colorScheme="pink"
         width="8vw"
         defaultValue={5}
-        onChange={setSpeed}
+        onChange={(speed) => store.dispatch(setSpeed(speed))}
         size="md"
         max={10}
         step={1}
@@ -74,7 +76,7 @@ const SpeedSlider = (setSpeed) => {
   );
 };
 
-const ValueSlider = (setValue, maxValue) => {
+const FrameSlider = (maxFrames) => {
   return (
     <Box marginLeft="0" marginRight="35px" flex="60" alignSelf="center">
       <Slider
@@ -82,10 +84,10 @@ const ValueSlider = (setValue, maxValue) => {
         colorScheme="pink"
         //width="70vw"
         defaultValue={0}
-        onChange={setValue}
+        onChange={(frame) => store.dispatch(setFrame(frame))}
         size="lg"
         //max={typeof maxValue === 'number' ? maxValue : 20}
-        max={maxValue}
+        max={maxFrames}
         step={1}
       >
         <SliderTrack>

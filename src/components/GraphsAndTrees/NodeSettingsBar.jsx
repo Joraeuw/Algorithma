@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const NodeSideBar = ({ isOpen, setOpen, path }) => {
   const nodeId = useSelector((state) => state.panelState.lastNodeId);
+  //Change the status of last selected node when watching the action
+
   const dispatch = useDispatch();
 
   const node = store.getState().panelState.nodes[nodeId];

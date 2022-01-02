@@ -88,6 +88,7 @@ const GraphNavOptions = ({ setPath }) => {
   );
 };
 
+//? FUTURE VERSION MIGHT INCLUDE ADDING NODES BY DRAG AND DROP
 // let Drag = (id) => {
 //   //I must add the function generateNwNode on the
 //   const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
