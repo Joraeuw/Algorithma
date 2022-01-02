@@ -1,6 +1,5 @@
 import { stateInit } from '../../components/GraphsAndTrees/node/initialNodeData';
 import { nodesIdMap } from '@/staticFunctions';
-import { act } from 'react-dom/test-utils';
 
 const NodesStateReducer = (
   state = { ...stateInit, nodes: nodesIdMap(stateInit.nodes) },
