@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { ArrowAngle } from '@/staticFunctions';
 import store from '@/redux/store';
-const scale = store.getState().scale;
 
 const BezierCurve = (props) => {
   const { startPoint, controlPoint1, controlPoint2, endPoint } = props.curve;
@@ -102,7 +101,7 @@ const TailHandle = ({ coordinates, onMouseDown }) => (
 );
 const HeadHandle = ({ coordinates, onMouseDown, crl2: crl, onMouseUp }) => {
   const { x, y } = coordinates;
-  const h = 30 * scale;
+  const h = 30;
   const point1 = {
     x: x + h / 3,
     y: y - (Math.sqrt(3) / 3) * h,

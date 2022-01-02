@@ -4,8 +4,6 @@ import { setOverallState } from '@redux/actions/setOverallState';
 import store from '@redux/store';
 import { calculateParentConnectionArea } from './MouseEventsStaticFunctions';
 
-const scale = store.getState().scale;
-
 const handleMouseMove = async ({ clientX, clientY, movementX, movementY }) => {
   //Might be improvable by taking draggingObjectId directly and afrter if creating the state
   const isDragging = store.getState().panelState.isDragging;
@@ -73,7 +71,7 @@ const handleMouseMove = async ({ clientX, clientY, movementX, movementY }) => {
 
     if (node.parentNodeId) {
       //2/3rds of triangle h
-      const z2_3 = (20 - 1) * scale;
+      const z2_3 = 20;
       const parentNode = newState.nodes[node.parentNodeId];
 
       if (parentNode.leftCurve.childId === nodeId) {
