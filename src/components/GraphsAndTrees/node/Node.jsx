@@ -1,5 +1,5 @@
 import BezierCurve from './BezierCurve';
-import Text from '@globals/Text';
+import Text from '@/components/utilComponents/Text';
 import './node.module.css';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';

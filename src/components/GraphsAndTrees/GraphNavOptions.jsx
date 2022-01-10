@@ -2,7 +2,7 @@ import DFSByValue from './Trees/BinaryTreeDFS';
 import { useSelector } from 'react-redux';
 import store from '@redux/store';
 import { defaultCoordinates as coordinates, offset } from '@/settings/screen';
-import { getStartPoint } from '@/staticFunctions';
+import { getStartPoint } from '@utils';
 import { R } from '@/settings/screen';
 import { v4 as generateUID } from 'uuid';
 import { addNewNode } from '@/redux/actions/addNewNode';
@@ -15,7 +15,7 @@ const handleClick = (setPath, rootNodeId, targetNodeId) => {
   setPath(path);
 };
 
-const handleNewNode = (state) => {
+const handleNewNode = () => {
   const nodeId = generateUID();
   const startInitR = getStartPoint(coordinates, R, -45);
   const startInitL = getStartPoint(coordinates, R, 225);
@@ -27,7 +27,7 @@ const handleNewNode = (state) => {
     //Take position form dropping postiion from react dnd
     position: coordinates,
     //Default value would be empty string
-    value: '',
+    value: 'set value',
     rightCurve: {
       childId: null,
       baseId: nodeId,

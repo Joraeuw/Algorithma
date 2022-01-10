@@ -6,7 +6,8 @@
       "@redux/*": ["src/redux/*"],
       "@pages/*": ["src/pages/*"],
       "@settings/*": ["src/settings/*"],
-      "@globals/*": ["src/components/globalComponents/*"]
+      "@globals/*": ["src/components/globalComponents/*"],
+      "@utils": ["src/utils/utils.js"]
     }
   }
 }

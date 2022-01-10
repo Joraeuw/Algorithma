@@ -1,4 +1,4 @@
-import { getStartPoint } from '@/staticFunctions';
+import { getStartPoint } from '@utils';
 
 const initR = 50;
 const offset = 0;
