@@ -18,7 +18,7 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
 
   const dispatch = useDispatch();
 
-  const node = store.getState().panelState.nodes[nodeId];
+  const node = useSelector((state) => state.panelState.nodes)[nodeId];
 
   const [nodeValue, setNodeValue] = useState(node.value);
 
@@ -128,7 +128,7 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
           >
             set node value
           </Button>
-          <Textarea
+          {/* <Textarea
             readOnly
             color="lightBlue"
             size="xl"
@@ -140,7 +140,12 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
             rows="10"
             value={path}
             placeholder="Path"
-          />
+          /> */}
+          <textarea
+            className="text-black"
+            readOnly
+            defaultValue={path}
+          ></textarea>
         </div>
       </div>
     </div>

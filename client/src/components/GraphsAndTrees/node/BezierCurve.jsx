@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { ArrowAngle } from '@/staticFunctions';
-import store from '@/redux/store';
+import { ArrowAngle } from '@utils';
 
 const BezierCurve = (props) => {
   const { startPoint, controlPoint1, controlPoint2, endPoint } = props.curve;

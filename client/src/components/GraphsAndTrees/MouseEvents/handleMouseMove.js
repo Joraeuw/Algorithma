@@ -1,5 +1,5 @@
 import { Zoom } from '@/redux/actions/Zoom';
-import { getEndAndControlPoint, getStartPoint } from '@/staticFunctions';
+import { getEndAndControlPoint, getStartPoint } from '@utils';
 import { setOverallState } from '@redux/actions/setOverallState';
 import store from '@redux/store';
 import { calculateParentConnectionArea } from './MouseEventsStaticFunctions';

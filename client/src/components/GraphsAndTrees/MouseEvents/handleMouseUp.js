@@ -1,7 +1,7 @@
 import { setDraggingObjectId } from '@redux/actions/setDraggingObjectId';
 import { draggingOccurs } from '@/redux/actions/draggingOccurs';
 import store from '@redux/store';
-import { isWithingPerimeter } from '@/staticFunctions';
+import { isWithingPerimeter } from '@utils';
 import { setOverallState } from '@redux/actions/setOverallState';
 import {
   resetCurvePosition,
