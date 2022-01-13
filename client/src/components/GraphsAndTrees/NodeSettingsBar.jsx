@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
 
+//! Path is the path that the algorith takes !
 const NodeSideBar = ({ isOpen, setOpen, path }) => {
   const nodeId = useSelector((state) => state.panelState.lastNodeId);
   //Change the status of last selected node when watching the action
@@ -142,7 +143,7 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
             placeholder="Path"
           /> */}
           <textarea
-            className="text-black"
+            className="text-black h-80"
             readOnly
             defaultValue={path}
           ></textarea>
