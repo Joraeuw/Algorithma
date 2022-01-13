@@ -3,8 +3,8 @@ import GraphNavOptions from '../components/GraphsAndTrees/GraphNavOptions';
 import NodeSideBar from '@/components/GraphsAndTrees/NodeSettingsBar';
 import { useState } from 'react';
 
-function GraphsAndTrees({ typeOfGraph = 'binary' }) {
-  const [path, setPath] = useState('');
+//! Path that the algorithm takes !
+function GraphsAndTrees({ typeOfGraph = 'binary', path, setPath }) {
   const [graphType, setGraphType] = useState(typeOfGraph);
   const [isOpen, setOpen] = useState(true);
   return (

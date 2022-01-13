@@ -21,7 +21,10 @@ import {
 } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
 
-const MediaControls = () => {
+//! algPath is the ath the algorithm takes to complete the task!
+//TODO: Take lines by triplets and display the changes on each slider change and/or play.
+const MediaControls = ({ algPath }) => {
+  
   const mediaControls = useSelector((state) => state.mediaControls);
 
   return (

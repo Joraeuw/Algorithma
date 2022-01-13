@@ -16,7 +16,8 @@ let findNodeRecursionDFS = (targetNodeValue, currentNode, idToValue) => {
 
   if (currentNode.value === targetNodeValue) {
     foundNode = true;
-    console.log(idToValue?.[currentNode.parentNodeId]);
+    console.log(idToValue);
+    console.log(currentNode.parentNodeId);
     record += `found at: ${currentNode.value}\n`;
     record += `${currentNode.value} => ${
       idToValue?.[currentNode.parentNodeId]
@@ -28,7 +29,11 @@ let findNodeRecursionDFS = (targetNodeValue, currentNode, idToValue) => {
     record += `${currentNode.value} => ${
       idToValue?.[currentNode.leftCurve.childId]
     }\n`;
-    findNodeRecursionDFS(targetNodeValue, nodes[currentNode.leftCurve.childId]);
+    findNodeRecursionDFS(
+      targetNodeValue,
+      nodes[currentNode.leftCurve.childId],
+      idToValue
+    );
   }
   if (currentNode.rightCurve.childId && !foundNode) {
     record += `${currentNode.value} => ${
@@ -36,10 +41,11 @@ let findNodeRecursionDFS = (targetNodeValue, currentNode, idToValue) => {
     }\n`;
     findNodeRecursionDFS(
       targetNodeValue,
-      nodes[currentNode.rightCurve.childId]
+      nodes[currentNode.rightCurve.childId],
+      idToValue
     );
   }
-  record += `${currentNode.value} => ${currentNode.value}\n`;
+  record += `${currentNode.value} => ${currentNode.parentNodeId}\n`;
 };
 
 let DFSByValue = (rootId, targetId) => {
