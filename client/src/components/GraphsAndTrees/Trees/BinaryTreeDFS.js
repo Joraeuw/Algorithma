@@ -1,14 +1,9 @@
+import { setMaxFrames } from '@/redux/actions/setMaxFrames';
 import store from '@redux/store';
 
 const nodes = store.getState().panelState.nodes;
 let record = '';
 let foundNode = null;
-
-//! FIX:
-//node0 => set value
-//found at: set value
-//set value => undefined
-//node0 => node0
 
 let findNodeRecursionDFS = (targetNodeValue, currentNode, idToValue) => {
   if (!currentNode) return;
@@ -51,7 +46,6 @@ let findNodeRecursionDFS = (targetNodeValue, currentNode, idToValue) => {
 let DFSByValue = (rootId, targetId) => {
   //Id to value mapping for node
   const idToValue = getMap();
-  console.log(idToValue);
   const root = nodes[rootId];
   const target = nodes[targetId];
   //RECORD/ PATH SAME THING
@@ -59,6 +53,9 @@ let DFSByValue = (rootId, targetId) => {
   foundNode = null;
   findNodeRecursionDFS(target.value, root, idToValue);
 
+  //Sets the maxFrames
+  record = record.substring(0, record.length - 1);
+  store.dispatch(setMaxFrames(record.split(/\n/).length));
   return record;
 };
 

@@ -70,10 +70,38 @@ const nodesIdMap = (flatArrayOfNodes) =>
     {}
   );
 
+const getTripletsByIndex = (data, index) => {
+  const lines = data.split('\n');
+  let triplet = [];
+
+  if (index >= lines.length) triplet = [];
+  if (index + 1 >= lines.length) triplet = [lines[index]];
+  if (index + 2 >= lines.length) triplet = [lines[index], lines[index + 1]];
+  else triplet = [lines[index], lines[index + 1], lines[index + 2]];
+
+  return {
+    tripletArr: triplet,
+    dataSize: lines.length,
+  };
+};
+
+const evaluateNodeStyle = (nodeStyle) => {
+  const className = 'default_node ';
+
+  if (nodeStyle.isTarget) className.concat('target ');
+  else if (nodeStyle.isRoot) className.concat('root ');
+
+  if (nodeStyle.isVisited) className.concat('visited_node ');
+  if (nodeStyle.isWithinTriplet) className.concat('triplet_node ');
+
+  return className;
+};
+
 export {
   getStartPoint,
   ArrowAngle,
   recalculateEndPoint as getEndAndControlPoint,
   isWithingPerimeter,
   nodesIdMap,
+  evaluateNodeStyle,
 };

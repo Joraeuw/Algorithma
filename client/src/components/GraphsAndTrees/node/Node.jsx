@@ -3,15 +3,20 @@ import Text from '@/components/utilComponents/Text';
 import './node.module.css';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { evaluateNodeStyle } from '@utils';
 
 const Node = (props) => {
   const id = props.nodeId;
   const node = useSelector((state) => state.panelState).nodes[id];
+  const nodeStyle = useSelector((state) => state.nodeStyle)[id];
+
   const nodeColor = node.isTarget
     ? 'green'
     : node.isRoot
     ? 'blue'
     : 'rgb(244, 0, 137)';
+
+  const className = evaluateNodeStyle(nodeStyle);
 
   const {
     handleMouseDown,
@@ -46,7 +51,7 @@ const Node = (props) => {
         ry={node.r}
         stroke={nodeColor}
         strokeWidth={4}
-        className="cursor-drag fill-current text-white"
+        className={className}
       />
       <Text
         className="unselectable pointer-events-none"

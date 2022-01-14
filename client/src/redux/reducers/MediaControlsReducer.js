@@ -1,6 +1,6 @@
 const MediaControlsReducer = (
   state = {
-    currentFrame: 0,
+    currentFrame: 1,
     isPlaying: false,
     maxFrames: 1,
     speed: 5,
