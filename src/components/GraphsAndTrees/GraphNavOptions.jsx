@@ -7,6 +7,7 @@ import { R } from '@/settings/screen';
 import { v4 as generateUID } from 'uuid';
 import { addNewNode } from '@/redux/actions/addNewNode';
 import { setOverallState } from '@/redux/actions/setOverallState';
+import { addNewNodeStyle } from '@/redux/actions/addNewNodeStyle';
 //import { useDrag } from 'react-dnd';
 //import Node from './node/Node';
 
@@ -58,9 +59,31 @@ const handleNewNode = () => {
     },
   };
 
-  // state.nodes[newNode.id] = newNode;
-  // store.dispatch(setOverallState(state));
+  let newNodeStyle = {
+    id: nodeId,
+
+    leftCurve: {
+      isWithinTriplet: false,
+      isVisited: false,
+      stroke: 'rgb(213, 0, 249)',
+    },
+    rightCurve: {
+      isWithinTriplet: false,
+      isVisited: false,
+      stroke: 'rgb(213, 0, 249)',
+    },
+    //styling
+    isVisited: false,
+    isTarget: false,
+    isRoot: false,
+    isWithinTriplet: false,
+
+    className: 'default_node',
+    stroke: 'rgb(244, 0, 137)',
+  };
+
   store.dispatch(addNewNode(newNode));
+  store.dispatch(addNewNodeStyle(newNodeStyle));
 };
 
 const GraphNavOptions = ({ setPath }) => {

@@ -1,3 +1,5 @@
+//TODO: AWAITS RIGHTCLICK IMPLEMENTATION ON NODE
+
 import React, { useState } from 'react';
 import { ChakraProvider, Box, Text, Container, Button } from '@chakra-ui/react';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';

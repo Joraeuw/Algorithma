@@ -3,7 +3,6 @@ import Text from '@/components/utilComponents/Text';
 import './node.module.css';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { evaluateNodeStyle } from '@utils';
 
 const Node = (props) => {
   const id = props.nodeId;
@@ -15,8 +14,8 @@ const Node = (props) => {
     : node.isRoot
     ? 'blue'
     : 'rgb(244, 0, 137)';
-
-  const className = evaluateNodeStyle(nodeStyle);
+  
+  const className = nodeStyle.className;
 
   const {
     handleMouseDown,
@@ -49,7 +48,7 @@ const Node = (props) => {
         cy={node.position.y}
         rx={node.r}
         ry={node.r}
-        stroke={nodeColor}
+        stroke={nodeStyle.stroke}
         strokeWidth={4}
         className={className}
       />

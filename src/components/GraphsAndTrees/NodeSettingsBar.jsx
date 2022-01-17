@@ -1,3 +1,4 @@
+import { removeNode } from '@/redux/actions/removeNode';
 import { setNodeValue as NodeValueSetter } from '@/redux/actions/setNodeValue';
 import { setOverallState } from '@/redux/actions/setOverallState';
 import { setRootNodeId } from '@/redux/actions/setRootNode';
@@ -26,25 +27,21 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
   const handleSettingNodeValue = (e) => setNodeValue(e.target.value);
   const handleCloseSidebar = () => setOpen(!isOpen);
   const handleSetRoot = () => {
-    dispatch(setRootNodeId(nodeId));
+    dispatch(setRootNodeId(nodeId, 'isRoot', true));
     setNodeValue(node.value);
   };
   const handleSetTarget = () => {
-    dispatch(setTargetNodeId(nodeId));
+    dispatch(setTargetNodeId(nodeId, 'isTarget', true));
     setNodeValue(node.value);
   };
 
   const rewriteNode = (e) => {
     const dataBox = document.getElementById('nodeInputValueBox');
     const data = { newValue: dataBox.value, nodeId: nodeId };
-    console.log(data);
+
     dispatch(NodeValueSetter(data));
   };
-  const handleRemoveNode = () => {
-    let state = { ...store.getState().panelState };
-    delete state.nodes[nodeId];
-    store.dispatch(setOverallState(state));
-  };
+
   return (
     <div
       className={`${
@@ -112,7 +109,7 @@ const NodeSideBar = ({ isOpen, setOpen, path }) => {
             block={false}
             iconOnly={false}
             ripple="light"
-            onClick={handleRemoveNode}
+            onClick={() => store.dispatch(removeNode(nodeId))}
           >
             remove node
           </Button>
