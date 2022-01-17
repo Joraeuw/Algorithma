@@ -7,6 +7,8 @@ import Node from '../node/Node';
 const BinaryTreePanel = () => {
   const nodesData = useSelector((state) => state.panelState).nodes;
   const viewBox = useSelector((state) => state.viewBox);
+  
+
 
   const nodes = Object.values(nodesData).map((nodeData) => (
     <Node

@@ -85,17 +85,15 @@ const getTripletsByIndex = (data, index) => {
   };
 };
 
-const evaluateNodeStyle = (nodeStyle) => {
-  const className = 'default_node ';
+function addString(string, newString) {
+  string += `${newString} `;
+  return string;
+}
 
-  if (nodeStyle.isTarget) className.concat('target ');
-  else if (nodeStyle.isRoot) className.concat('root ');
-
-  if (nodeStyle.isVisited) className.concat('visited_node ');
-  if (nodeStyle.isWithinTriplet) className.concat('triplet_node ');
-
-  return className;
-};
+function removeString(string, removeable) {
+  string.replace(removeable, '');
+  return string;
+}
 
 export {
   getStartPoint,
@@ -103,5 +101,6 @@ export {
   recalculateEndPoint as getEndAndControlPoint,
   isWithingPerimeter,
   nodesIdMap,
-  evaluateNodeStyle,
+  addString,
+  removeString,
 };

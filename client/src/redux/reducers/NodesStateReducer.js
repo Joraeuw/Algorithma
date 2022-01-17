@@ -26,17 +26,23 @@ const NodesStateReducer = (
       newState.lastNodeId = action.payload.nodeId;
       break;
     case 'SET_ROOT_NODE_ID':
-      newState.nodes[newState.rootNodeId].isRoot = false;
+      if (newState.nodes[newState.rootNodeId])
+        newState.nodes[newState.rootNodeId].isRoot = false;
       newState.nodes[action.payload.nodeId].isRoot = true;
       newState.rootNodeId = action.payload.nodeId;
       break;
     case 'SET_TARGET_NODE_ID':
-      newState.nodes[newState.targetNodeId].isTarget = false;
+      if (newState.nodes[newState.targetNodeId])
+        newState.nodes[newState.targetNodeId].isTarget = false;
       newState.nodes[action.payload.nodeId].isTarget = true;
       newState.targetNodeId = action.payload.nodeId;
       break;
     case 'SET_NODE_VALUE':
       newState.nodes[action.payload.nodeId].value = action.payload.newValue;
+      break;
+    case 'REMOVE_NODE':
+      console.log(3);
+      delete newState.nodes[action.payload.nodeId];
       break;
     default:
       break;

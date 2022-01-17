@@ -1,6 +1,6 @@
-export const setTargetNodeId = (nodeId) => {
+export const setTargetNodeId = (nodeId, key = null, value = null) => {
   return {
     type: 'SET_TARGET_NODE_ID',
-    payload: { nodeId },
+    payload: { nodeId, key, value },
   };
 };
