@@ -11,11 +11,9 @@ let findNodeRecursionDFS = (targetNodeValue, currentNode, idToValue) => {
 
   if (currentNode.value === targetNodeValue) {
     foundNode = true;
-    console.log(idToValue);
-    console.log(currentNode.parentNodeId);
     record += `found at: ${currentNode.value}\n`;
-    record += `${currentNode.value} => ${
-      idToValue?.[currentNode.parentNodeId]
+    record += `${idToValue?.[currentNode.parentNodeId]} <= ${
+      currentNode.value
     }\n`;
 
     return;
@@ -40,7 +38,7 @@ let findNodeRecursionDFS = (targetNodeValue, currentNode, idToValue) => {
       idToValue
     );
   }
-  record += `${currentNode.value} => ${currentNode.parentNodeId}\n`;
+  record += `${currentNode.parentNodeId} <= ${currentNode.value}\n`;
 };
 
 let DFSByValue = (rootId, targetId) => {

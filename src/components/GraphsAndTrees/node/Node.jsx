@@ -8,13 +8,7 @@ const Node = (props) => {
   const id = props.nodeId;
   const node = useSelector((state) => state.panelState).nodes[id];
   const nodeStyle = useSelector((state) => state.nodeStyle)[id];
-
-  const nodeColor = node.isTarget
-    ? 'green'
-    : node.isRoot
-    ? 'blue'
-    : 'rgb(244, 0, 137)';
-  
+  //console.log(`${id} - ${nodeStyle.stroke}`);
   const className = nodeStyle.className;
 
   const {
