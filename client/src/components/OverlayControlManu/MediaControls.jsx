@@ -20,11 +20,21 @@ import {
   IoPlaySkipForward,
 } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentOperation } from '@utils';
+import { setNodeBoolean } from '@/redux/actions/setNodeBoolean';
 
 //! algPath is the ath the algorithm takes to complete the task!
 //TODO: Take lines by triplets and display the changes on each slider change and/or play.
 const MediaControls = ({ algPath }) => {
+  const dispath = useDispatch();
   const mediaControls = useSelector((state) => state.mediaControls);
+  const currentOperation = getCurrentOperation(
+    algPath,
+    mediaControls.currentFrame
+  );
+  console.log(currentOperation);
+
+  //dispatch(setNodeBoolean());
 
   return (
     <ChakraProvider>

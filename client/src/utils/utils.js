@@ -1,3 +1,6 @@
+import { setNodeBoolean } from '@/redux/actions/setNodeBoolean';
+import store from '@/redux/store';
+
 const getStartPoint = ({ x, y }, r, theta) => {
   theta *= Math.PI / 180;
   const result = { x: x + r * Math.cos(theta), y: y - r * Math.sin(theta) };
@@ -70,18 +73,43 @@ const nodesIdMap = (flatArrayOfNodes) =>
     {}
   );
 
-const getTripletsByIndex = (data, index) => {
+const getCurrentOperation = (data, index) => {
   const lines = data.split('\n');
-  let triplet = [];
+  // console.log(lines, index);
+  let type = '';
+  const regOfTransition = /(.+) => (.+)/;
+  const regOfReturn = /(.+) <= (.+)/;
+  const regOfTargetReached = /found at: (.+)/;
+  const regOfExit = /(undefined|null) <= (.+)/;
+  let nodeAId, nodeBId;
 
-  if (index >= lines.length) triplet = [];
-  if (index + 1 >= lines.length) triplet = [lines[index]];
-  if (index + 2 >= lines.length) triplet = [lines[index], lines[index + 1]];
-  else triplet = [lines[index], lines[index + 1], lines[index + 2]];
+  if (regOfTransition.test(lines[index])) {
+    console.log('This operation is of type transition!');
+    type = 'transition';
+    const match = regOfTransition.exec(lines[index]);
+    [nodeAId, nodeBId] = [match[1], match[2]];
+  } else if (regOfExit.test(lines[index])) {
+    console.log('This operation is of type exit!');
+    type = 'exit';
+    const match = regOfExit.exec(lines[index]);
+    nodeAId = match[2];
+  } else if (regOfTargetReached.test(lines[index])) {
+    console.log('This operation is of type target reached!');
+    type = 'target';
+    const match = regOfTargetReached.exec(lines[index]);
+    nodeAId = match[1];
+  } else if (regOfReturn.test(lines[index])) {
+    console.log('This operation is of type return!');
+    type = 'return';
+    const match = regOfReturn.exec(lines[index]);
+    [nodeAId, nodeBId] = [match[2], match[1]];
+  }
 
   return {
-    tripletArr: triplet,
-    dataSize: lines.length,
+    nodeAId,
+    nodeBId,
+    size: lines.length,
+    type,
   };
 };
 
@@ -103,4 +131,5 @@ export {
   nodesIdMap,
   addString,
   removeString,
+  getCurrentOperation,
 };

@@ -1,6 +1,8 @@
 //TODO: Store all the curve and node styling data
 
 let binaryNodesStyling = {
+  target: 'node0',
+  root: 'node0',
   node0: {
     id: 'node0',
 
@@ -17,7 +19,7 @@ let binaryNodesStyling = {
     //styling
     isVisited: false,
     isTarget: true,
-    isRoot: false,
+    isRoot: true,
     isWithinTriplet: false,
 
     className: 'default_node',

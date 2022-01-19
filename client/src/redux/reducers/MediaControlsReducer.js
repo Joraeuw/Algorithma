@@ -1,6 +1,6 @@
 const MediaControlsReducer = (
   state = {
-    currentFrame: 1,
+    currentFrame: 0,
     isPlaying: false,
     maxFrames: 1,
     speed: 5,
@@ -17,7 +17,7 @@ const MediaControlsReducer = (
       newState.isPlaying = !state.isPlaying;
       break;
     case 'SET_MAX_FRAME':
-      newState.maxFrames = action.payload.maxFrames;
+      newState.maxFrames = action.payload.maxFrames - 1;
       break;
     case 'SET_SPEED':
       newState.speed = action.payload.speed;
