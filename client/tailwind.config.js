@@ -69,6 +69,9 @@ module.exports = {
       '350px': '350px',
       '400px': '400px',
     },
+    boxShadow: {
+      round: '0 0 100px 100px #fff 0 0 100px 60px #f0f,',
+    },
   },
 
   variants: {

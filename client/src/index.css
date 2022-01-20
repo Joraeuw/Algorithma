@@ -46,6 +46,10 @@
   .default_node {
     @apply cursor-drag fill-current text-white;
   }
+
+  .glow {
+    @apply min-w-150px h-80 rounded-full bg-white shadow-round;
+  }
 }
 
 @layer base {

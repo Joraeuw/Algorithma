@@ -76,9 +76,9 @@ const nodesIdMap = (flatArrayOfNodes) =>
 const getCurrentOperation = (data, index) => {
   const lines = data.split('\n');
   const past = lines.slice(0, index);
-  console.log(index, lines.length);
   let stack = [];
   let visited = new Set();
+
   if (lines.length <= 1) return;
 
   if (index + 1 === lines.length) visited.add(operationType(lines[0]).match[1]);
@@ -97,7 +97,6 @@ const getCurrentOperation = (data, index) => {
       visited.add(oldMatch[1]);
       stack.pop();
     }
-    console.log(stack, visited);
   }
 
   // for (const operation of past) {
