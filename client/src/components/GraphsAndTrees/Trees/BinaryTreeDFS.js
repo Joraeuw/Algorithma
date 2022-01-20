@@ -5,51 +5,36 @@ const nodes = store.getState().panelState.nodes;
 let record = '';
 let foundNode = null;
 
-let findNodeRecursionDFS = (targetNodeValue, currentNode, idToValue) => {
+let findNodeRecursionDFS = (targetNode, currentNode) => {
   if (!currentNode) return;
-  console.log(currentNode);
+  //console.log(currentNode);
 
-  if (currentNode.value === targetNodeValue) {
+  if (currentNode.id === targetNode.id) {
     foundNode = true;
-    record += `found at: ${currentNode.value}\n`;
-    record += `${idToValue?.[currentNode.parentNodeId]} <= ${
-      currentNode.value
-    }\n`;
+    record += `found at: ${currentNode.id}\n`;
+    record += `${currentNode.parentNodeId} <= ${currentNode.id}\n`;
 
     return;
   }
   if (currentNode.leftCurve.childId && !foundNode) {
-    record += `${currentNode.value} => ${
-      idToValue?.[currentNode.leftCurve.childId]
-    }\n`;
-    findNodeRecursionDFS(
-      targetNodeValue,
-      nodes[currentNode.leftCurve.childId],
-      idToValue
-    );
+    record += `${currentNode.id} => ${currentNode.leftCurve.childId}\n`;
+    findNodeRecursionDFS(targetNode, nodes[currentNode.leftCurve.childId]);
   }
   if (currentNode.rightCurve.childId && !foundNode) {
-    record += `${currentNode.value} => ${
-      idToValue?.[currentNode.rightCurve.childId]
-    }\n`;
-    findNodeRecursionDFS(
-      targetNodeValue,
-      nodes[currentNode.rightCurve.childId],
-      idToValue
-    );
+    record += `${currentNode.id} => ${currentNode.rightCurve.childId}\n`;
+    findNodeRecursionDFS(targetNode, nodes[currentNode.rightCurve.childId]);
   }
-  record += `${currentNode.parentNodeId} <= ${currentNode.value}\n`;
+  record += `${currentNode.parentNodeId} <= ${currentNode.id}\n`;
 };
 
 let DFSByValue = (rootId, targetId) => {
   //Id to value mapping for node
-  const idToValue = getMap();
   const root = nodes[rootId];
   const target = nodes[targetId];
   //RECORD/ PATH SAME THING
   record = '';
   foundNode = null;
-  findNodeRecursionDFS(target.value, root, idToValue);
+  findNodeRecursionDFS(target, root);
 
   //Sets the maxFrames
   record = record.substring(0, record.length - 1);
@@ -57,14 +42,14 @@ let DFSByValue = (rootId, targetId) => {
   return record;
 };
 
-function getMap() {
-  const map = {};
+// function getMap() {
+//   const map = {};
 
-  for (const node in nodes) {
-    map[node.toString()] = nodes[node].value;
-  }
+//   for (const node in nodes) {
+//     map[node.toString()] = nodes[node].value;
+//   }
 
-  return map;
-}
+//   return map;
+// }
 
 export default DFSByValue;
