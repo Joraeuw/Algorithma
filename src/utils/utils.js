@@ -75,33 +75,44 @@ const nodesIdMap = (flatArrayOfNodes) =>
 
 const getCurrentOperation = (data, index) => {
   const lines = data.split('\n');
-  // console.log(lines, index);
-  let type = '';
-  const regOfTransition = /(.+) => (.+)/;
-  const regOfReturn = /(.+) <= (.+)/;
-  const regOfTargetReached = /found at: (.+)/;
-  const regOfExit = /(undefined|null) <= (.+)/;
+  const past = lines.slice(0, index);
+  console.log(index, lines.length);
+  let stack = [];
+  let visited = new Set();
+  if (lines.length <= 1) return;
+
+  if (index + 1 === lines.length) visited.add(operationType(lines[0]).match[1]);
+
+  for (const operation of past) {
+    let { type: oldType, match: oldMatch } = operationType(operation);
+    if (oldType === 'transition' && index !== 0) {
+      stack.push(oldMatch[1]);
+    } else if (oldType === 'return') {
+      stack.pop();
+      visited.add(oldMatch[2]);
+    } else if (oldType === 'exit') {
+      stack.pop();
+      stack.pop();
+    } else if (oldType === 'target') {
+      visited.add(oldMatch[1]);
+      stack.pop();
+    }
+    console.log(stack, visited);
+  }
+
+  // for (const operation of past) {
+  // }
+
+  let { type, match } = operationType(lines[index]);
   let nodeAId, nodeBId;
 
-  if (regOfTransition.test(lines[index])) {
-    console.log('This operation is of type transition!');
-    type = 'transition';
-    const match = regOfTransition.exec(lines[index]);
+  if (type === 'transition') {
     [nodeAId, nodeBId] = [match[1], match[2]];
-  } else if (regOfExit.test(lines[index])) {
-    console.log('This operation is of type exit!');
-    type = 'exit';
-    const match = regOfExit.exec(lines[index]);
+  } else if (type === 'exit') {
     nodeAId = match[2];
-  } else if (regOfTargetReached.test(lines[index])) {
-    console.log('This operation is of type target reached!');
-    type = 'target';
-    const match = regOfTargetReached.exec(lines[index]);
+  } else if (type === 'target') {
     nodeAId = match[1];
-  } else if (regOfReturn.test(lines[index])) {
-    console.log('This operation is of type return!');
-    type = 'return';
-    const match = regOfReturn.exec(lines[index]);
+  } else if (type === 'return') {
     [nodeAId, nodeBId] = [match[2], match[1]];
   }
 
@@ -110,8 +121,40 @@ const getCurrentOperation = (data, index) => {
     nodeBId,
     size: lines.length,
     type,
+    stack,
+    visited,
   };
 };
+
+function operationType(operation) {
+  const regOfTransition = /(.+) => (.+)/;
+  const regOfReturn = /(.+) <= (.+)/;
+  const regOfTargetReached = /found at: (.+)/;
+  const regOfExit = /(undefined|null) <= (.+)/;
+
+  let type = '';
+  let match;
+  let text = '';
+  if (regOfTransition.test(operation)) {
+    text = 'This operation is of type transition!';
+    type = 'transition';
+    match = regOfTransition.exec(operation);
+  } else if (regOfExit.test(operation)) {
+    text = 'This operation is of type exit!';
+    type = 'exit';
+    match = regOfExit.exec(operation);
+  } else if (regOfTargetReached.test(operation)) {
+    text = 'This operation is of type target reached!';
+    type = 'target';
+    match = regOfTargetReached.exec(operation);
+  } else if (regOfReturn.test(operation)) {
+    text = 'This operation is of type return!';
+    type = 'return';
+    match = regOfReturn.exec(operation);
+  }
+  //console.log(text);
+  return { type, match };
+}
 
 function addString(string, newString) {
   string += `${newString} `;

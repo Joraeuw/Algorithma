@@ -20,22 +20,31 @@ import {
   IoPlaySkipForward,
 } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentOperation } from '@utils';
+import { getCurrentOperation, nodesIdMap } from '@utils';
 import { setNodeBoolean } from '@/redux/actions/setNodeBoolean';
+import { useEffect } from 'react';
+
+let nodeSet = new Set();
+let visited = [];
 
 //! algPath is the ath the algorithm takes to complete the task!
 //TODO: Take lines by triplets and display the changes on each slider change and/or play.
 const MediaControls = ({ algPath }) => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const mediaControls = useSelector((state) => state.mediaControls);
   const currentOperation = getCurrentOperation(
     algPath,
     mediaControls.currentFrame
   );
-  console.log(currentOperation);
+  if (currentOperation) {
+    for (const nodeId of currentOperation?.stack) {
+      nodeSet.add(nodeId);
+    }
+    visited = currentOperation.visited;
+  }
 
-  //dispatch(setNodeBoolean());
-
+  //foreach node in the stack: add them to visited,
+  //console.log(visited);
   return (
     <ChakraProvider>
       <div className="media-controls-container">
