@@ -44,7 +44,7 @@ const Node = (props) => {
         ry={node.r}
         stroke={nodeStyle.stroke}
         strokeWidth={4}
-        className={className}
+        className={className + ' glow'}
       />
       <Text
         className="unselectable pointer-events-none"
