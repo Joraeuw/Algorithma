@@ -2,6 +2,11 @@
 
 The web application was created with the purpose of supporting informatics education and the learning of algorithms by visualizing a wide range of algorithms in an incredibly beautiful and clear manner. Build with React, Redux, JavaScript, TailWindCSS, WebPack, PostCSS.
 
+## NOW DEPLOYED ON:
+
+https://algorithma.herokuapp.com (preferably on: https://algorithma.herokuapp.com/graphs/binaryTree)
+Keep in mind it is still not ready to be used by unqualified personnel.
+
 ## THIS PROJECT IS STILL EARLY IN DEVELOPMENT
 
 This project is currently very early in development. No feature is fully functional yet!
