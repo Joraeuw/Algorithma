@@ -36,6 +36,7 @@ const NodeStyleReducer = (state = binaryNodesStyling, action) => {
         );
         newState[oldNodeId] = setStroke(newState[oldNodeId]);
       }
+
       console.log(action.payload.key);
       switch (action.payload.key) {
         case 'isVisited':
@@ -56,28 +57,15 @@ const NodeStyleReducer = (state = binaryNodesStyling, action) => {
           else
             newState.className = addClass(newState.className, 'triplet_node');
           break;
-        //! IT NEVER VISITS IS TARGET FOR SOME REASON FIND
-        //! OUT WHI MIGHT BE MISSCARENES FROM STATE AND NEWSTATE
-        /*case 'isTarget':
-          console.log(action.payload);
-          if (newState[action.payload.nodeId].ísTarget) {
-            newState[action.payload.nodeId].stroke = 'blue';
-            newState[newState.target].stroke = newState[newState.target].isRoot
-              ? 'green'
-              : 'rgb(244, 0, 137)';
-          } else newState[action.payload.nodeId].stroke = 'rgb(244, 0, 137)';
+        case 'isInPath':
+          if (newState[action.payload.nodeId].isInPath)
+            newState.stroke = 'yellow';
+          else newState.stroke = 'rgb(255, 195, 0)';
           break;
-        case 'isRoot':
-          if (newState[action.payload.nodeId].isRoot) {
-            newState[action.payload.nodeId].stroke = 'green';
-            newState[newState.root].stroke = newState[newState.root].isTarget
-              ? 'blue'
-              : 'rgb(244, 0, 137)';
-            console.log(newState[newState.root].stroke);
-          } else newState[action.payload.nodeId].stroke = 'rgb(244, 0, 137)';
+        default:
           break;
-      }*/
       }
+      break;
     case 'SET_CURVE_BOOLEAN':
       const curve = action.payload.isRight ? 'rightCurve' : 'leftCurve';
 
@@ -92,15 +80,24 @@ const NodeStyleReducer = (state = binaryNodesStyling, action) => {
 
       switch (action.payload.key) {
         case 'isVisited':
-          if (state[curve][action.payload.nodeId].isVisited)
-            newState[curve].stroke = 'rgb(211, 211, 211)';
+          if (newState[action.payload.nodeId][curve].isVisited)
+            newState[action.payload.nodeId][curve].stroke =
+              'rgb(211, 211, 211)';
           //!SELECTED SECTION OF CURVE (MUST CHOOSE APP COLOR)
-          else newState[curve].stroke = 'rgb(213, 0, 249)';
+          else
+            newState[action.payload.nodeId][curve].stroke = 'rgb(213, 0, 249)';
           break;
         case 'isWithinTriplet':
-          if (state[curve][action.payload.nodeId].isWithinTriplet)
-            newState[curve].stroke = 'rgb(213, 0, 249)';
-          else newState[curve].stroke = 'rgb(255, 195, 0)';
+          if (newState[action.payload.nodeId][curve].isWithinTriplet)
+            newState[action.payload.nodeId][curve].stroke = 'rgb(213, 0, 249)';
+          else
+            newState[action.payload.nodeId][curve].stroke = 'rgb(255, 195, 0)';
+          break;
+        case 'isInPath':
+          if (newState[action.payload.nodeId][curve].isInPath)
+            newState[action.payload.nodeId][curve].stroke = 'yellow';
+          else
+            newState[action.payload.nodeId][curve].stroke = 'rgb(255, 195, 0)';
           break;
         default:
           break;
@@ -120,6 +117,7 @@ const NodeStyleReducer = (state = binaryNodesStyling, action) => {
 function setStroke(node) {
   if (node.isTarget) node.stroke = 'green';
   else if (node.isRoot) node.stroke = 'blue';
+  else if (node.isInStack) node.stroke = 'yellow';
   else node.stroke = 'rgb(244, 0, 137)';
   return node;
 }

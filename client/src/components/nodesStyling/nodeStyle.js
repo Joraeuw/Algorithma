@@ -8,12 +8,14 @@ let binaryNodesStyling = {
 
     leftCurve: {
       isWithinTriplet: false,
+      isInPath: false,
       isVisited: false,
       stroke: 'rgb(213, 0, 249)',
     },
     rightCurve: {
       isWithinTriplet: false,
       isVisited: false,
+      isInPath: false,
       stroke: 'rgb(213, 0, 249)',
     },
     //styling
@@ -21,6 +23,7 @@ let binaryNodesStyling = {
     isTarget: true,
     isRoot: true,
     isWithinTriplet: false,
+    isInPath: false,
 
     className: 'default_node',
     stroke: 'green',

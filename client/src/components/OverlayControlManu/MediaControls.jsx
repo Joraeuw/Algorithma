@@ -37,14 +37,21 @@ const MediaControls = ({ algPath }) => {
     mediaControls.currentFrame
   );
   if (currentOperation) {
-    for (const nodeId of currentOperation?.stack) {
-      nodeSet.add(nodeId);
-    }
+    nodeSet = currentOperation.stack;
     visited = currentOperation.visited;
   }
 
-  //foreach node in the stack: add them to visited,
-  //console.log(visited);
+  //! nodeSet: nodes to root
+  //! visited: nodes that will not be touched again
+  //! type: type of operation
+  //! nodeAId: id of current node
+  //! nodeBId: id of second current node
+  //// size: count of operations
+
+  // for (const nodeId of visited) {
+  //   dispatch(setNodeBoolean(nodeId, 'isVisited', true));
+  // }
+
   return (
     <ChakraProvider>
       <div className="media-controls-container">
